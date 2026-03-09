@@ -11,48 +11,37 @@
     "labels": ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020*", "2021*", "2022", "2023"],
     "series": [
       { "name": "Agree", "data": [46, 45, 50, 55, 61, 65, 68, 80, 83, 74, 74] }
-    ]
-  },
-  {
-    "id": "shs-outdoor-visits",
-    "name": "Weekly Visits to the Outdoors",
-    "type": "tracking",
-    "source": "Scottish Household Survey",
-    "topic": "Outdoor Recreation",
-    "sampleSize": "~10,000 households",
-    "frequency": "Annual",
-    "description": "Percentage of adults visiting the outdoors for recreation at least once a week. The large increase between 2019 and 2022 may partly reflect changed behaviour following the COVID-19 pandemic. No comparable data for 2020–2021 (telephone survey).",
-    "labels": ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2022", "2023"],
-    "series": [
-      { "name": "At least weekly", "data": [42, 46, 48, 49, 48, 52, 59, 56, 70, 68] }
-    ]
-  },
-  {
-    "id": "shs-greenspace-distance",
-    "name": "Walking Distance to Nearest Green or Blue Space",
-    "type": "tracking",
-    "source": "Scottish Household Survey",
-    "topic": "Green & Blue Spaces",
-    "sampleSize": "~10,000 households",
-    "frequency": "Annual",
-    "description": "Percentage of adults who reported living within a 5-minute walk of their nearest green or blue space. The trend has been broadly flat across the time series, consistently lying between 65% and 70%.",
-    "labels": ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2022", "2023"],
-    "series": [
-      { "name": "Within 5-min walk", "data": [68, 69, 67, 65, 65, 65, 66, 70, 68] }
-    ]
-  },
-  {
-    "id": "shs-greenspace-frequency",
-    "name": "Frequent Use of Nearest Green or Blue Space",
-    "type": "tracking",
-    "source": "Scottish Household Survey",
-    "topic": "Green & Blue Spaces",
-    "sampleSize": "~10,000 households",
-    "frequency": "Annual",
-    "description": "Percentage of adults using their nearest green or blue space every day or several times a week. The proportion did not change between 2013 and 2019, then increased — possibly reflecting changed behaviour following COVID-19. Not asked in 2018 or 2022.",
-    "labels": ["2017", "2019", "2023"],
-    "series": [
-      { "name": "Every day / several times a week", "data": [37, 36, 44] }
+    ],
+    "demographics": [
+      {
+        "name": "Age",
+        "text": "Agreement by age group (2023)",
+        "options": [
+          { "label": "16–34", "value": 71 },
+          { "label": "35–54", "value": 76 },
+          { "label": "55–74", "value": 77 },
+          { "label": "75+", "value": 68 }
+        ]
+      },
+      {
+        "name": "Gender",
+        "text": "Agreement by gender (2023)",
+        "options": [
+          { "label": "Male", "value": 72 },
+          { "label": "Female", "value": 76 }
+        ]
+      },
+      {
+        "name": "Deprivation",
+        "text": "Agreement by SIMD quintile (2023)",
+        "options": [
+          { "label": "Most deprived 20%", "value": 68 },
+          { "label": "2nd quintile", "value": 72 },
+          { "label": "3rd quintile", "value": 75 },
+          { "label": "4th quintile", "value": 77 },
+          { "label": "Least deprived 20%", "value": 78 }
+        ]
+      }
     ]
   },
   {
@@ -73,23 +62,37 @@
           { "label": "Very or fairly dissatisfied", "value": 10 }
         ]
       }
-    ]
-  },
-  {
-    "id": "shs-outdoor-by-health-2023",
-    "name": "Outdoor Visits by Self-Reported Health (2023)",
-    "type": "snapshot",
-    "source": "Scottish Household Survey",
-    "topic": "Outdoor Recreation",
-    "sampleSize": "~10,000 households",
-    "date": "2023",
-    "description": "Percentage of adults visiting the outdoors at least once a week, broken down by self-reported health status (2023). Adults in good or very good health are far more likely to visit the outdoors weekly.",
-    "questions": [
+    ],
+    "demographics": [
       {
-        "text": "Weekly outdoor visits by self-reported health status",
+        "name": "Deprivation",
+        "text": "Satisfaction (very/fairly) by SIMD quintile (2023)",
         "options": [
-          { "label": "Very good / good health", "value": 74 },
-          { "label": "Very bad / bad health", "value": 37 }
+          { "label": "Most deprived 20%", "value": 62 },
+          { "label": "2nd quintile", "value": 72 },
+          { "label": "3rd quintile", "value": 78 },
+          { "label": "4th quintile", "value": 82 },
+          { "label": "Least deprived 20%", "value": 86 }
+        ]
+      },
+      {
+        "name": "Age",
+        "text": "Satisfaction (very/fairly) by age group (2023)",
+        "options": [
+          { "label": "16–34", "value": 72 },
+          { "label": "35–54", "value": 75 },
+          { "label": "55–74", "value": 79 },
+          { "label": "75+", "value": 77 }
+        ]
+      },
+      {
+        "name": "Urban/Rural",
+        "text": "Satisfaction (very/fairly) by urban/rural classification (2023)",
+        "options": [
+          { "label": "Large urban", "value": 70 },
+          { "label": "Other urban", "value": 74 },
+          { "label": "Small town", "value": 78 },
+          { "label": "Rural", "value": 86 }
         ]
       }
     ]
