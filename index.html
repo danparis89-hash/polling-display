@@ -150,6 +150,7 @@
     .badge-tracking { background: #1e3a5f; color: #6cb4ee; }
     .badge-snapshot { background: #3a2a1e; color: #eeb86c; }
     .badge-topic { background: #1e3a2a; color: #6ceeb8; }
+    .badge-demographic { background: #2e1e3a; color: #c06cff; }
 
     /* Main content */
     .main {
@@ -391,6 +392,12 @@
           <option value="all">All sources</option>
         </select>
       </div>
+      <div class="filter-section">
+        <label for="demographicFilter">Demographic</label>
+        <select class="filter-select" id="demographicFilter" onchange="applyFilters()">
+          <option value="all">All demographics</option>
+        </select>
+      </div>
     </div>
     <div class="poll-list" id="pollList"></div>
   </aside>
@@ -498,6 +505,7 @@ let polls = [
     type: "snapshot",
     source: "Scottish Household Survey",
     topic: "Outdoor Recreation",
+    demographic: "Health Status",
     sampleSize: "~10,000 households",
     date: "2023",
     description: "Percentage of adults visiting the outdoors at least once a week, broken down by self-reported health status (2023). Adults in good or very good health are far more likely to visit the outdoors weekly.",
@@ -510,6 +518,116 @@ let polls = [
         ]
       }
     ]
+  },
+  {
+    id: "shs-outdoor-by-age-2023",
+    name: "Outdoor Visits by Age Group (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Outdoor Recreation",
+    demographic: "Age",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults visiting the outdoors at least once a week, by age group (2023). Younger adults are more likely to visit the outdoors regularly.",
+    questions: [
+      {
+        text: "Weekly outdoor visits by age group",
+        options: [
+          { label: "16\u201334", value: 73 },
+          { label: "35\u201354", value: 72 },
+          { label: "55\u201374", value: 67 },
+          { label: "75+", value: 47 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "shs-outdoor-by-deprivation-2023",
+    name: "Outdoor Visits by Deprivation (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Outdoor Recreation",
+    demographic: "Deprivation",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults visiting the outdoors at least once a week, by Scottish Index of Multiple Deprivation quintile (2023). Adults in the least deprived areas are more likely to visit the outdoors.",
+    questions: [
+      {
+        text: "Weekly outdoor visits by SIMD quintile",
+        options: [
+          { label: "Most deprived 20%", value: 56 },
+          { label: "2nd quintile", value: 64 },
+          { label: "3rd quintile", value: 69 },
+          { label: "4th quintile", value: 74 },
+          { label: "Least deprived 20%", value: 78 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "shs-climate-by-age-2023",
+    name: "Climate Urgency by Age Group (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Climate Change",
+    demographic: "Age",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults who agree climate change is an immediate and urgent problem, by age group (2023).",
+    questions: [
+      {
+        text: "Climate change is immediate and urgent, by age group",
+        options: [
+          { label: "16\u201334", value: 71 },
+          { label: "35\u201354", value: 76 },
+          { label: "55\u201374", value: 77 },
+          { label: "75+", value: 68 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "shs-greenspace-by-deprivation-2023",
+    name: "Green Space Access by Deprivation (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Green & Blue Spaces",
+    demographic: "Deprivation",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults within a 5-minute walk of nearest green or blue space, by SIMD quintile (2023). Access is lower in the most deprived areas.",
+    questions: [
+      {
+        text: "Within 5-min walk of green/blue space, by SIMD quintile",
+        options: [
+          { label: "Most deprived 20%", value: 57 },
+          { label: "2nd quintile", value: 64 },
+          { label: "3rd quintile", value: 70 },
+          { label: "4th quintile", value: 73 },
+          { label: "Least deprived 20%", value: 78 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "shs-outdoor-by-gender-2023",
+    name: "Outdoor Visits by Gender (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Outdoor Recreation",
+    demographic: "Gender",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults visiting the outdoors at least once a week, by gender (2023).",
+    questions: [
+      {
+        text: "Weekly outdoor visits by gender",
+        options: [
+          { label: "Male", value: 70 },
+          { label: "Female", value: 66 }
+        ]
+      }
+    ]
   }
 ];
 
@@ -519,6 +637,7 @@ let polls = [
 let currentTypeFilter = 'all';
 let currentTopicFilter = 'all';
 let currentSourceFilter = 'all';
+let currentDemographicFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
 
@@ -528,6 +647,7 @@ let chartInstance = null;
 function populateFilterDropdowns() {
   const topics = [...new Set(polls.map(p => p.topic).filter(Boolean))].sort();
   const sources = [...new Set(polls.map(p => p.source).filter(Boolean))].sort();
+  const demographics = [...new Set(polls.map(p => p.demographic).filter(Boolean))].sort();
 
   const topicSel = document.getElementById('topicFilter');
   topicSel.innerHTML = '<option value="all">All topics</option>'
@@ -536,6 +656,10 @@ function populateFilterDropdowns() {
   const sourceSel = document.getElementById('sourceFilter');
   sourceSel.innerHTML = '<option value="all">All sources</option>'
     + sources.map(s => `<option value="${s}">${s}</option>`).join('');
+
+  const demoSel = document.getElementById('demographicFilter');
+  demoSel.innerHTML = '<option value="all">All demographics</option>'
+    + demographics.map(d => `<option value="${d}">${d}</option>`).join('');
 }
 
 function setTypeFilter(type, btn) {
@@ -548,6 +672,7 @@ function setTypeFilter(type, btn) {
 function applyFilters() {
   currentTopicFilter = document.getElementById('topicFilter').value;
   currentSourceFilter = document.getElementById('sourceFilter').value;
+  currentDemographicFilter = document.getElementById('demographicFilter').value;
   renderPollList();
 }
 
@@ -560,6 +685,7 @@ function renderPollList() {
     if (currentTypeFilter !== 'all' && p.type !== currentTypeFilter) return false;
     if (currentTopicFilter !== 'all' && p.topic !== currentTopicFilter) return false;
     if (currentSourceFilter !== 'all' && p.source !== currentSourceFilter) return false;
+    if (currentDemographicFilter !== 'all' && p.demographic !== currentDemographicFilter) return false;
     return true;
   });
 
@@ -577,6 +703,7 @@ function renderPollList() {
           ${p.type}
         </span>
         ${p.topic ? `<span class="poll-type-badge badge-topic">${p.topic}</span>` : ''}
+        ${p.demographic ? `<span class="poll-type-badge badge-demographic">${p.demographic}</span>` : ''}
       </div>
     </div>
   `).join('');
@@ -667,6 +794,7 @@ function renderTrackingPoll(poll) {
           ticks: { color: '#8b8fa8' }
         },
         y: {
+          min: 0,
           grid: { color: '#2e334830' },
           ticks: { color: '#8b8fa8', callback: v => v + '%' }
         }
