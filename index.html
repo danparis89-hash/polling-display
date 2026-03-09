@@ -405,7 +405,9 @@
 
 <script>
 // ──────────────────────────────────────────────
-// DATA — loaded from data/polls.json
+// DATA
+// To update: edit the polls array below directly.
+// A copy is also kept in data/polls.json.
 // ──────────────────────────────────────────────
 
 const COLORS = [
@@ -413,7 +415,103 @@ const COLORS = [
   '#c06cff', '#6cffe0', '#ff6ce0', '#ffe06c'
 ];
 
-let polls = [];
+let polls = [
+  {
+    id: "shs-climate-urgency",
+    name: "Climate Change: Immediate and Urgent Problem",
+    type: "tracking",
+    source: "Scottish Household Survey",
+    topic: "Climate Change",
+    sampleSize: "~10,000 households",
+    frequency: "Annual",
+    description: "Percentage of adults who agree that 'climate change is an immediate and urgent problem'. Question first included in SHS in 2013. Note: 2020 and 2021 data collected by telephone due to COVID-19 and published as experimental statistics \u2014 not directly comparable to face-to-face years.",
+    labels: ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020*", "2021*", "2022", "2023"],
+    series: [
+      { name: "Agree", data: [46, 45, 50, 55, 61, 65, 68, 80, 83, 74, 74] }
+    ]
+  },
+  {
+    id: "shs-outdoor-visits",
+    name: "Weekly Visits to the Outdoors",
+    type: "tracking",
+    source: "Scottish Household Survey",
+    topic: "Outdoor Recreation",
+    sampleSize: "~10,000 households",
+    frequency: "Annual",
+    description: "Percentage of adults visiting the outdoors for recreation at least once a week. The large increase between 2019 and 2022 may partly reflect changed behaviour following the COVID-19 pandemic. No comparable data for 2020\u20132021 (telephone survey).",
+    labels: ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2022", "2023"],
+    series: [
+      { name: "At least weekly", data: [42, 46, 48, 49, 48, 52, 59, 56, 70, 68] }
+    ]
+  },
+  {
+    id: "shs-greenspace-distance",
+    name: "Walking Distance to Nearest Green or Blue Space",
+    type: "tracking",
+    source: "Scottish Household Survey",
+    topic: "Green & Blue Spaces",
+    sampleSize: "~10,000 households",
+    frequency: "Annual",
+    description: "Percentage of adults who reported living within a 5-minute walk of their nearest green or blue space. The trend has been broadly flat across the time series, consistently lying between 65% and 70%.",
+    labels: ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2022", "2023"],
+    series: [
+      { name: "Within 5-min walk", data: [68, 69, 67, 65, 65, 65, 66, 70, 68] }
+    ]
+  },
+  {
+    id: "shs-greenspace-frequency",
+    name: "Frequent Use of Nearest Green or Blue Space",
+    type: "tracking",
+    source: "Scottish Household Survey",
+    topic: "Green & Blue Spaces",
+    sampleSize: "~10,000 households",
+    frequency: "Annual",
+    description: "Percentage of adults using their nearest green or blue space every day or several times a week. The proportion did not change between 2013 and 2019, then increased \u2014 possibly reflecting changed behaviour following COVID-19. Not asked in 2018 or 2022.",
+    labels: ["2017", "2019", "2023"],
+    series: [
+      { name: "Every day / several times a week", data: [37, 36, 44] }
+    ]
+  },
+  {
+    id: "shs-greenspace-satisfaction-2023",
+    name: "Satisfaction with Nearest Green or Blue Space (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Green & Blue Spaces",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Satisfaction with nearest green or blue space, 2023. The overall satisfaction level (76% very or fairly satisfied) has remained at a similar level throughout the time series. Not asked in 2018 or 2022.",
+    questions: [
+      {
+        text: "How satisfied are you with your nearest green or blue space?",
+        options: [
+          { label: "Very or fairly satisfied", value: 76 },
+          { label: "Neither / no opinion", value: 14 },
+          { label: "Very or fairly dissatisfied", value: 10 }
+        ]
+      }
+    ]
+  },
+  {
+    id: "shs-outdoor-by-health-2023",
+    name: "Outdoor Visits by Self-Reported Health (2023)",
+    type: "snapshot",
+    source: "Scottish Household Survey",
+    topic: "Outdoor Recreation",
+    sampleSize: "~10,000 households",
+    date: "2023",
+    description: "Percentage of adults visiting the outdoors at least once a week, broken down by self-reported health status (2023). Adults in good or very good health are far more likely to visit the outdoors weekly.",
+    questions: [
+      {
+        text: "Weekly outdoor visits by self-reported health status",
+        options: [
+          { label: "Very good / good health", value: 74 },
+          { label: "Very bad / bad health", value: 37 }
+        ]
+      }
+    ]
+  }
+];
 
 // ──────────────────────────────────────────────
 // APP STATE
@@ -653,32 +751,13 @@ function renderSnapshotPoll(poll) {
 }
 
 // ──────────────────────────────────────────────
-// INIT — load data from JSON file
+// INIT
 // ──────────────────────────────────────────────
-async function init() {
-  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric'
-  });
-
-  try {
-    const resp = await fetch('data/polls.json');
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    polls = await resp.json();
-    populateFilterDropdowns();
-    renderPollList();
-  } catch (err) {
-    document.getElementById('mainContent').innerHTML = `
-      <div class="empty-state">
-        <div style="color:#ff6c8c;">Failed to load polling data</div>
-        <div style="font-size:0.85rem;">${err.message}</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">
-          Make sure <code>data/polls.json</code> exists and the page is served via HTTP (not file://)
-        </div>
-      </div>
-    `;
-  }
-}
-init();
+document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+populateFilterDropdowns();
+renderPollList();
 </script>
 
 </body>
