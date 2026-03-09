@@ -149,6 +149,7 @@
 
     .badge-tracking { background: #1e3a5f; color: #6cb4ee; }
     .badge-snapshot { background: #3a2a1e; color: #eeb86c; }
+    .badge-topic { background: #1e3a2a; color: #6ceeb8; }
 
     /* Main content */
     .main {
@@ -322,6 +323,35 @@
       .bar-label { width: 100px; min-width: 100px; font-size: 0.78rem; }
     }
 
+    .filter-section {
+      margin-top: 0.75rem;
+    }
+
+    .filter-section label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      appearance: auto;
+    }
+
+    .filter-select:focus {
+      outline: 1px solid var(--accent);
+    }
+
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -345,9 +375,21 @@
     <div class="sidebar-header">
       <h2>Polls</h2>
       <div class="filter-tabs">
-        <button class="filter-tab active" onclick="filterPolls('all')">All</button>
-        <button class="filter-tab" onclick="filterPolls('tracking')">Tracking</button>
-        <button class="filter-tab" onclick="filterPolls('snapshot')">Snapshot</button>
+        <button class="filter-tab active" data-filter="type" data-value="all" onclick="setTypeFilter('all', this)">All</button>
+        <button class="filter-tab" data-filter="type" data-value="tracking" onclick="setTypeFilter('tracking', this)">Tracking</button>
+        <button class="filter-tab" data-filter="type" data-value="snapshot" onclick="setTypeFilter('snapshot', this)">Snapshot</button>
+      </div>
+      <div class="filter-section">
+        <label for="topicFilter">Topic</label>
+        <select class="filter-select" id="topicFilter" onchange="applyFilters()">
+          <option value="all">All topics</option>
+        </select>
+      </div>
+      <div class="filter-section">
+        <label for="sourceFilter">Source</label>
+        <select class="filter-select" id="sourceFilter" onchange="applyFilters()">
+          <option value="all">All sources</option>
+        </select>
       </div>
     </div>
     <div class="poll-list" id="pollList"></div>
@@ -376,18 +418,57 @@ let polls = [];
 // ──────────────────────────────────────────────
 // APP STATE
 // ──────────────────────────────────────────────
-let currentFilter = 'all';
+let currentTypeFilter = 'all';
+let currentTopicFilter = 'all';
+let currentSourceFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
+
+// ──────────────────────────────────────────────
+// FILTERS
+// ──────────────────────────────────────────────
+function populateFilterDropdowns() {
+  const topics = [...new Set(polls.map(p => p.topic).filter(Boolean))].sort();
+  const sources = [...new Set(polls.map(p => p.source).filter(Boolean))].sort();
+
+  const topicSel = document.getElementById('topicFilter');
+  topicSel.innerHTML = '<option value="all">All topics</option>'
+    + topics.map(t => `<option value="${t}">${t}</option>`).join('');
+
+  const sourceSel = document.getElementById('sourceFilter');
+  sourceSel.innerHTML = '<option value="all">All sources</option>'
+    + sources.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+function setTypeFilter(type, btn) {
+  currentTypeFilter = type;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  currentTopicFilter = document.getElementById('topicFilter').value;
+  currentSourceFilter = document.getElementById('sourceFilter').value;
+  renderPollList();
+}
 
 // ──────────────────────────────────────────────
 // RENDER SIDEBAR
 // ──────────────────────────────────────────────
 function renderPollList() {
   const list = document.getElementById('pollList');
-  const filtered = currentFilter === 'all'
-    ? polls
-    : polls.filter(p => p.type === currentFilter);
+  const filtered = polls.filter(p => {
+    if (currentTypeFilter !== 'all' && p.type !== currentTypeFilter) return false;
+    if (currentTopicFilter !== 'all' && p.topic !== currentTopicFilter) return false;
+    if (currentSourceFilter !== 'all' && p.source !== currentSourceFilter) return false;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div style="padding:1rem;color:var(--text-muted);font-size:0.85rem;text-align:center;">No polls match the current filters</div>';
+    return;
+  }
 
   list.innerHTML = filtered.map(p => `
     <div class="poll-item ${activePollId === p.id ? 'active' : ''}"
@@ -397,17 +478,10 @@ function renderPollList() {
         <span class="poll-type-badge ${p.type === 'tracking' ? 'badge-tracking' : 'badge-snapshot'}">
           ${p.type}
         </span>
-        <span>${p.source}</span>
+        ${p.topic ? `<span class="poll-type-badge badge-topic">${p.topic}</span>` : ''}
       </div>
     </div>
   `).join('');
-}
-
-function filterPolls(type) {
-  currentFilter = type;
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  renderPollList();
 }
 
 // ──────────────────────────────────────────────
@@ -590,6 +664,7 @@ async function init() {
     const resp = await fetch('data/polls.json');
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     polls = await resp.json();
+    populateFilterDropdowns();
     renderPollList();
   } catch (err) {
     document.getElementById('mainContent').innerHTML = `
