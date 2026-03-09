@@ -623,7 +623,6 @@ function renderPollList() {
           ${p.type}
         </span>
         ${p.topic ? `<span class="poll-type-badge badge-topic">${p.topic}</span>` : ''}
-        ${p.demographics ? `<span class="poll-type-badge badge-demographic">Demographics</span>` : ''}
       </div>
     </div>
   `).join('');
@@ -772,7 +771,7 @@ function renderDemographicSection(poll, selectedIndex) {
     `<button class="demo-tab ${i === idx ? 'active' : ''}" onclick="renderDemographicSection(polls.find(p=>p.id==='${poll.id}'), ${i})">${d.name}</button>`
   ).join('');
 
-  const maxVal = Math.max(...demo.options.map(o => o.value));
+  const maxVal = 100;
   const bars = demo.options.map((opt, i) => {
     const color = COLORS[i % COLORS.length];
     const width = (opt.value / maxVal) * 100;
@@ -822,7 +821,7 @@ function renderSnapshotPoll(poll) {
 
   const container = document.getElementById('snapshotContainer');
   container.innerHTML = poll.questions.map(q => {
-    const maxVal = Math.max(...q.options.map(o => o.value));
+    const maxVal = 100;
     const bars = q.options.map((opt, i) => {
       const color = COLORS[i % COLORS.length];
       const width = (opt.value / maxVal) * 100;
