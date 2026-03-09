@@ -363,7 +363,7 @@
 
 <script>
 // ──────────────────────────────────────────────
-// MOCK DATA — replace with real data as needed
+// DATA — loaded from data/polls.json
 // ──────────────────────────────────────────────
 
 const COLORS = [
@@ -371,169 +371,7 @@ const COLORS = [
   '#c06cff', '#6cffe0', '#ff6ce0', '#ffe06c'
 ];
 
-const polls = [
-  {
-    id: 'pres-approval',
-    name: 'Presidential Approval Rating',
-    type: 'tracking',
-    source: 'National Polling Group',
-    sampleSize: '1,500 adults',
-    frequency: 'Weekly',
-    description: 'Do you approve or disapprove of the way the president is handling their job?',
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    series: [
-      { name: 'Approve', data: [48, 47, 46, 45, 44, 45, 46, 47, 48, 47, 46, 45] },
-      { name: 'Disapprove', data: [42, 43, 44, 45, 46, 45, 44, 43, 42, 43, 44, 45] },
-      { name: 'Unsure', data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10] }
-    ]
-  },
-  {
-    id: 'party-preference',
-    name: 'Party Preference',
-    type: 'tracking',
-    source: 'Civic Research Institute',
-    sampleSize: '2,000 likely voters',
-    frequency: 'Monthly',
-    description: 'If the general election were held today, which party would you vote for?',
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-    series: [
-      { name: 'Party A', data: [34, 35, 36, 35, 37, 38, 37, 38] },
-      { name: 'Party B', data: [31, 30, 29, 30, 29, 28, 29, 28] },
-      { name: 'Party C', data: [12, 13, 14, 14, 13, 13, 14, 14] },
-      { name: 'Undecided', data: [23, 22, 21, 21, 21, 21, 20, 20] }
-    ]
-  },
-  {
-    id: 'economy-direction',
-    name: 'Direction of the Economy',
-    type: 'tracking',
-    source: 'Economic Sentiment Project',
-    sampleSize: '1,200 adults',
-    frequency: 'Bi-weekly',
-    description: 'Generally speaking, do you think the economy is headed in the right direction or the wrong direction?',
-    labels: ['W1', 'W3', 'W5', 'W7', 'W9', 'W11', 'W13', 'W15', 'W17', 'W19'],
-    series: [
-      { name: 'Right direction', data: [38, 37, 36, 35, 34, 35, 36, 38, 39, 40] },
-      { name: 'Wrong direction', data: [52, 53, 54, 55, 56, 55, 54, 52, 51, 50] },
-      { name: 'Not sure', data: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10] }
-    ]
-  },
-  {
-    id: 'top-issues',
-    name: 'Most Important Issue Facing the Country',
-    type: 'snapshot',
-    source: 'National Polling Group',
-    sampleSize: '1,800 registered voters',
-    date: 'February 2026',
-    description: 'What do you think is the most important issue facing the country today?',
-    questions: [
-      {
-        text: 'Most important issue facing the country today',
-        options: [
-          { label: 'Economy / Cost of living', value: 32 },
-          { label: 'Healthcare', value: 18 },
-          { label: 'Immigration', value: 15 },
-          { label: 'Education', value: 11 },
-          { label: 'Climate / Environment', value: 9 },
-          { label: 'National security', value: 8 },
-          { label: 'Other', value: 7 }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'leader-fav',
-    name: 'Leader Favourability Ratings',
-    type: 'snapshot',
-    source: 'Civic Research Institute',
-    sampleSize: '1,600 adults',
-    date: 'March 2026',
-    description: 'Do you have a favourable or unfavourable opinion of the following leaders?',
-    questions: [
-      {
-        text: 'Leader Alpha — Favourability',
-        options: [
-          { label: 'Very favourable', value: 18 },
-          { label: 'Somewhat favourable', value: 24 },
-          { label: 'Somewhat unfavourable', value: 20 },
-          { label: 'Very unfavourable', value: 28 },
-          { label: 'No opinion', value: 10 }
-        ]
-      },
-      {
-        text: 'Leader Beta — Favourability',
-        options: [
-          { label: 'Very favourable', value: 12 },
-          { label: 'Somewhat favourable', value: 22 },
-          { label: 'Somewhat unfavourable', value: 25 },
-          { label: 'Very unfavourable', value: 31 },
-          { label: 'No opinion', value: 10 }
-        ]
-      },
-      {
-        text: 'Leader Gamma — Favourability',
-        options: [
-          { label: 'Very favourable', value: 22 },
-          { label: 'Somewhat favourable', value: 28 },
-          { label: 'Somewhat unfavourable', value: 18 },
-          { label: 'Very unfavourable', value: 20 },
-          { label: 'No opinion', value: 12 }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'trust-institutions',
-    name: 'Trust in Institutions',
-    type: 'snapshot',
-    source: 'Public Trust Monitor',
-    sampleSize: '2,200 adults',
-    date: 'January 2026',
-    description: 'How much trust do you have in each of the following institutions?',
-    questions: [
-      {
-        text: 'Trust in the national government',
-        options: [
-          { label: 'A great deal', value: 8 },
-          { label: 'A fair amount', value: 26 },
-          { label: 'Not very much', value: 38 },
-          { label: 'None at all', value: 28 }
-        ]
-      },
-      {
-        text: 'Trust in the judiciary',
-        options: [
-          { label: 'A great deal', value: 15 },
-          { label: 'A fair amount', value: 35 },
-          { label: 'Not very much', value: 30 },
-          { label: 'None at all', value: 20 }
-        ]
-      },
-      {
-        text: 'Trust in the media',
-        options: [
-          { label: 'A great deal', value: 5 },
-          { label: 'A fair amount', value: 20 },
-          { label: 'Not very much', value: 40 },
-          { label: 'None at all', value: 35 }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'consumer-confidence',
-    name: 'Consumer Confidence Index',
-    type: 'tracking',
-    source: 'Economic Sentiment Project',
-    sampleSize: '3,000 households',
-    frequency: 'Monthly',
-    description: 'Composite index measuring consumer optimism about current and future economic conditions (baseline = 100).',
-    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
-    series: [
-      { name: 'Index value', data: [102, 99, 97, 95, 94, 96, 98, 100, 101, 103] }
-    ]
-  }
-];
+let polls = [];
 
 // ──────────────────────────────────────────────
 // APP STATE
@@ -741,12 +579,31 @@ function renderSnapshotPoll(poll) {
 }
 
 // ──────────────────────────────────────────────
-// INIT
+// INIT — load data from JSON file
 // ──────────────────────────────────────────────
-document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
-  year: 'numeric', month: 'long', day: 'numeric'
-});
-renderPollList();
+async function init() {
+  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  try {
+    const resp = await fetch('data/polls.json');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    polls = await resp.json();
+    renderPollList();
+  } catch (err) {
+    document.getElementById('mainContent').innerHTML = `
+      <div class="empty-state">
+        <div style="color:#ff6c8c;">Failed to load polling data</div>
+        <div style="font-size:0.85rem;">${err.message}</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">
+          Make sure <code>data/polls.json</code> exists and the page is served via HTTP (not file://)
+        </div>
+      </div>
+    `;
+  }
+}
+init();
 </script>
 
 </body>
