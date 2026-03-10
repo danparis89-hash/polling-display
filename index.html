@@ -686,8 +686,9 @@ function buildTrackingChart(poll) {
   const ctx = document.getElementById('trackingChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
 
-  // Main series
-  const datasets = poll.series.map((s, i) => ({
+  // Main series — when a demographic overlay is active, only show "Immediate and urgent problem"
+  const mainSeries = activeDemographic ? poll.series.slice(0, 1) : poll.series;
+  const datasets = mainSeries.map((s, i) => ({
     label: s.name,
     data: s.data,
     borderColor: COLORS[i % COLORS.length],
@@ -715,8 +716,7 @@ function buildTrackingChart(poll) {
           pointRadius: 3,
           pointHoverRadius: 5,
           tension: 0.3,
-          fill: false,
-          spanGaps: true
+          fill: false
         });
       });
     }
@@ -762,7 +762,7 @@ function buildTrackingChart(poll) {
   // Legend
   const legendEl = document.getElementById('chartLegend');
   let datasetIndex = 0;
-  let legendHtml = poll.series.map((s, i) => {
+  let legendHtml = mainSeries.map((s, i) => {
     const idx = datasetIndex++;
     return `
     <div class="legend-item" onclick="toggleDataset(${idx}, this)">
