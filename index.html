@@ -457,6 +457,12 @@
           <option value="all">All sources</option>
         </select>
       </div>
+      <div class="filter-section">
+        <label for="pollsterFilter">Pollster</label>
+        <select class="filter-select" id="pollsterFilter" onchange="applyFilters()">
+          <option value="all">All pollsters</option>
+        </select>
+      </div>
     </div>
     <div class="poll-list" id="pollList"></div>
   </aside>
@@ -483,74 +489,197 @@ const COLORS = [
 
 let polls = [
   {
-    id: "shs-climate-urgency",
-    name: "Climate Change: Immediate and Urgent Problem",
+    id: "shs-climate-perceptions",
+    name: "Perceptions about Climate Change",
     type: "tracking",
     source: "Scottish Household Survey",
+    pollster: "Ipsos",
     topic: "Climate Change",
     sampleSize: "~10,000 households",
     frequency: "Annual",
-    description: "Percentage of adults who agree that 'climate change is an immediate and urgent problem'. Question first included in SHS in 2013. Note: 2020 and 2021 data collected by telephone due to COVID-19 and published as experimental statistics \u2014 not directly comparable to face-to-face years.",
-    labels: ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020*", "2021*", "2022", "2023"],
+    description: "Percentage of adults by their perception of climate change. Note: 2020 and 2021 data not available.",
+    labels: ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
     series: [
-      { name: "Agree", data: [46, 45, 50, 55, 61, 65, 68, 80, 83, 74, 74] }
+      { name: "Immediate and urgent problem", data: [46, 45, 50, 55, 61, 65, 68, null, null, 74, 74] },
+      { name: "More of a problem for the future", data: [25, 26, 23, 23, 18, 16, 14, null, null, 12, 11] },
+      { name: "Not really a problem", data: [7, 8, 7, 6, 5, 4, 3, null, null, 3, 3] },
+      { name: "Not convinced it is happening", data: [13, 11, 11, 9, 8, 7, 6, null, null, 5, 6] }
     ],
     demographics: [
       {
+        name: "Deprivation (SIMD)",
+        series: [
+          { name: "Quintile 1 - most deprived", data: [39, 44, 44, 42, 50, 52, 60, null, null, 65, 64] },
+          { name: "Quintile 2", data: [44, 44, 45, 52, 52, 50, 63, null, null, 69, 73] },
+          { name: "Quintile 3", data: [47, 45, 51, 57, 64, 65, 71, null, null, 72, 72] },
+          { name: "Quintile 4", data: [47, 50, 51, 57, 66, 70, 72, null, null, 76, 76] },
+          { name: "Quintile 5 - least deprived", data: [52, 54, 58, 60, 72, 75, 76, null, null, 85, 82] }
+        ]
+      },
+      {
+        name: "Urban/Rural",
+        series: [
+          { name: "Large urban areas", data: [48, 50, 55, 59, 67, 71, 71, null, null, 77, 78] },
+          { name: "Small accessible towns", data: [41, 44, 45, 52, 64, 64, 68, null, null, 78, 74] },
+          { name: "Accessible rural", data: [49, 45, 49, 54, 56, 60, 69, null, null, 69, 73] },
+          { name: "Other urban", data: [43, 42, 46, 52, 58, 62, 66, null, null, 73, 70] },
+          { name: "Small remote towns", data: [48, 41, 44, 56, 56, 55, 62, null, null, 71, 69] },
+          { name: "Remote rural", data: [44, 47, 53, 54, 55, 56, 69, null, null, 72, 68] }
+        ]
+      },
+      {
         name: "Age",
         series: [
-          { name: "16\u201324", data: [38, 40, 46, null, 58, 67, 69, null, null, 60, null] },
-          { name: "25\u201334", data: [47, null, null, null, null, null, 67, null, null, 78, null] },
-          { name: "35\u201344", data: [54, null, null, null, null, null, 72, null, null, null, null] },
-          { name: "45\u201359", data: [51, null, null, null, null, null, 72, null, null, null, null] },
-          { name: "60\u201374", data: [42, null, null, null, null, null, 68, null, null, null, null] },
-          { name: "75+", data: [33, null, null, null, null, 46, 56, null, null, 65, null] }
+          { name: "16 to 24", data: [38, 40, 46, 53, 58, 67, 69, null, null, 60, 71] },
+          { name: "25 to 34", data: [47, 45, 45, 54, 68, 67, 67, null, null, 78, 81] },
+          { name: "35 to 44", data: [54, 52, 58, 61, 70, 72, 72, null, null, 77, 77] },
+          { name: "45 to 59", data: [51, 51, 54, 57, 62, 68, 72, null, null, 77, 75] },
+          { name: "60 to 74", data: [42, 43, 50, 58, 58, 58, 68, null, null, 76, 69] },
+          { name: "75 plus", data: [33, 31, 36, 37, 44, 46, 56, null, null, 65, 65] }
         ]
       },
       {
-        name: "Gender",
+        name: "Sex",
         series: [
-          { name: "Male", data: [null, null, null, null, null, null, 66, null, null, 74, null] },
-          { name: "Female", data: [null, null, null, null, null, null, 70, null, null, 74, null] }
-        ]
-      },
-      {
-        name: "Education",
-        series: [
-          { name: "Degree or professional", data: [null, null, null, null, null, null, 80, null, null, 86, 84] },
-          { name: "No qualifications", data: [null, null, null, null, null, null, 49, null, null, 58, 62] }
+          { name: "Male", data: [45, 45, 49, 55, 61, 66, 66, null, null, 74, 72] },
+          { name: "Female", data: [47, 46, 50, 55, 61, 63, 70, null, null, 74, 76] }
         ]
       }
     ]
   },
   {
-    id: "shs-greenspace-satisfaction-2023",
-    name: "Satisfaction with Nearest Green or Blue Space (2023)",
+    id: "link-nature-2022",
+    name: "Attitudes to nature",
     type: "snapshot",
-    source: "Scottish Household Survey",
-    topic: "Green & Blue Spaces",
-    sampleSize: "~10,000 households",
-    date: "2023",
-    description: "Satisfaction with nearest green or blue space, 2023. The overall satisfaction level (76% very or fairly satisfied) has remained at a similar level throughout the time series. Not asked in 2018 or 2022.",
+    source: "Scottish Environment LINK",
+    pollster: "Survation",
+    topic: "Nature",
+    sampleSize: "1,033",
+    date: "November 2022",
+    description: "Scottish public attitudes to nature and the natural environment.",
     questions: [
       {
-        text: "How satisfied are you with your nearest green or blue space?",
+        text: "The natural environment includes Scotland's landscapes, seas, coasts and wildlife. How important, if at all, do you think Scotland's natural environment is to the country as a whole?",
         options: [
-          { label: "Very or fairly satisfied", value: 76 },
-          { label: "Neither / no opinion", value: 14 },
-          { label: "Very or fairly dissatisfied", value: 10 }
-        ]
-      }
-    ],
-    demographics: [
-      {
-        name: "Deprivation",
-        text: "Satisfaction (very/fairly) by SIMD quintile (SHS 2023)",
-        options: [
-          { label: "Most deprived 20%", value: 64 },
-          { label: "Least deprived 20%", value: 82 }
+          { label: "NET Important", value: 96 },
+          { label: "NET Unimportant", value: 3 },
+          { label: "Don't Know", value: 1 }
         ]
       },
+      {
+        text: "How important is the natural environment to you personally?",
+        options: [
+          { label: "NET: Important", value: 92 },
+          { label: "NET: Unimportant", value: 7 },
+          { label: "Don't Know", value: 1 }
+        ]
+      },
+      {
+        text: "How would you rate the condition of Scotland's nature?",
+        options: [
+          { label: "NET: Good", value: 82 },
+          { label: "NET: Bad", value: 4 },
+          { label: "Neither good nor bad", value: 12 },
+          { label: "Don't Know", value: 2 }
+        ]
+      },
+      {
+        text: "Within your lifetime, do you think the state of Scotland's natural environment has improved or worsened?",
+        options: [
+          { label: "Improved", value: 19 },
+          { label: "Stayed the same", value: 31 },
+          { label: "Worsened", value: 39 },
+          { label: "Don't know", value: 11 }
+        ]
+      },
+      {
+        text: "Which of the following, if any, do you think poses the greatest risk to Scotland's nature? Please choose three.",
+        options: [
+          { label: "Pollution", value: 82 },
+          { label: "Climate change", value: 78 },
+          { label: "Ocean warming and acidification", value: 53 },
+          { label: "Invasive species", value: 29 },
+          { label: "Fishing and marine activities", value: 23 },
+          { label: "Farming", value: 19 },
+          { label: "Other activities (please specify)", value: 9 },
+          { label: "None of the above", value: 1 },
+          { label: "Don't know", value: 2 }
+        ]
+      },
+      {
+        text: "To what extent are you concerned, if at all, about the threat of climate change and human activity to Scotland's natural environment?",
+        options: [
+          { label: "NET: Concerned", value: 82 },
+          { label: "NET: Unconcerned", value: 17 },
+          { label: "Don't know", value: 2 }
+        ]
+      },
+      {
+        text: "How well or badly do you think the Scottish Government is doing in protecting nature?",
+        options: [
+          { label: "NET: Well", value: 47 },
+          { label: "NET: Badly", value: 37 },
+          { label: "Don't know", value: 15 }
+        ]
+      },
+      {
+        text: "At the upcoming UN Biodiversity Conference, a global target is expected to be agreed upon, working to protect 30% of land and sea by 2030. Which of the following statements is closest to your view?",
+        options: [
+          { label: "Scotland should adopt this '30 by 30' target", value: 66 },
+          { label: "Scotland should NOT adopt this '30 by 30' target", value: 13 },
+          { label: "Don't know", value: 21 }
+        ]
+      },
+      {
+        text: "The Scottish Government has set targets to plant more trees to help tackle climate change. On the right soils and with sensitive techniques, commercial forestry usually grows quicker and involves growing non-native tree species in an area. However, growing native species in woodlands has a greater biodiversity benefit and also reduces atmospheric carbon, albeit more slowly. Which of the following is closest to your view?",
+        options: [
+          { label: "There should be a focus on growing native woodlands across Scotland's landscapes, even if it takes time to grow them", value: 80 },
+          { label: "There should be a focus on growing non-native woodlands across Scotland's landscape, even if it reduces the biodiversity of these areas", value: 10 },
+          { label: "Don't know", value: 10 }
+        ]
+      },
+      {
+        text: "How important, if at all, is it to you personally that Scotland's seas are in a healthy state?",
+        options: [
+          { label: "NET Important", value: 91 },
+          { label: "NET Unimportant", value: 5 },
+          { label: "Don't know", value: 3 }
+        ]
+      },
+      {
+        text: "Which of the following do you think represent the greatest threat to the health of Scotland's seas? Please rank your top 3. (Sum % of Rank 1,2,3)",
+        options: [
+          { label: "Chemical or sewage pollution", value: 69 },
+          { label: "Litter pollution", value: 61 },
+          { label: "Impacts of climate change", value: 48 },
+          { label: "Industrial fishing", value: 28 },
+          { label: "Offshore oil and gas extraction", value: 26 },
+          { label: "Shipping and transport", value: 14 },
+          { label: "Energy infrastructure (wind turbines, subsea cables)", value: 13 },
+          { label: "Invasive non-native species", value: 12 },
+          { label: "Aquaculture (fish and shellfish farming)", value: 11 },
+          { label: "Coastal developments", value: 9 },
+          { label: "Marine Tourism", value: 5 },
+          { label: "Aquaculture (seaweed cultivation)", value: 4 }
+        ]
+      },
+      {
+        text: "The Scottish government spends around half a billion pounds on farm funding annually. Many current farming practices cause pollution and severely deplete wildlife, as well as making farming a large source of greenhouse gas emissions. Next year the Scottish Government will create a new system of farm funding. How important is it to you that public spending on farming should support methods that restore nature and tackle climate change in addition to producing food?",
+        options: [
+          { label: "NET Important", value: 85 },
+          { label: "NET Unimportant", value: 10 },
+          { label: "Don't know", value: 5 }
+        ]
+      },
+      {
+        text: "Under the current system, many farms are entitled to \"direct payments\" from the Scottish government, based on the amount of land they own, which some argue provides a steady income away from dependence solely on food prices. Bigger farm businesses receive most of this money and there are few conditions as to how they farm the land. To what extent would you support or oppose capping direct payments available to farmers so there is more available to spend on climate and nature-friendly farming?",
+        options: [
+          { label: "NET Support", value: 62 },
+          { label: "Neither support nor oppose", value: 20 },
+          { label: "NET Oppose", value: 10 },
+          { label: "Don't know", value: 9 }
+        ]
+      }
     ]
   }
 ];
@@ -566,6 +695,7 @@ const DEMO_COLORS = [
 let currentTypeFilter = 'all';
 let currentTopicFilter = 'all';
 let currentSourceFilter = 'all';
+let currentPollsterFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
 let activeDemographic = null; // name of active demographic group or null
@@ -576,6 +706,7 @@ let activeDemographic = null; // name of active demographic group or null
 function populateFilterDropdowns() {
   const topics = [...new Set(polls.map(p => p.topic).filter(Boolean))].sort();
   const sources = [...new Set(polls.map(p => p.source).filter(Boolean))].sort();
+  const pollsters = [...new Set(polls.map(p => p.pollster).filter(Boolean))].sort();
 
   const topicSel = document.getElementById('topicFilter');
   topicSel.innerHTML = '<option value="all">All topics</option>'
@@ -584,6 +715,10 @@ function populateFilterDropdowns() {
   const sourceSel = document.getElementById('sourceFilter');
   sourceSel.innerHTML = '<option value="all">All sources</option>'
     + sources.map(s => `<option value="${s}">${s}</option>`).join('');
+
+  const pollsterSel = document.getElementById('pollsterFilter');
+  pollsterSel.innerHTML = '<option value="all">All pollsters</option>'
+    + pollsters.map(p => `<option value="${p}">${p}</option>`).join('');
 }
 
 function setTypeFilter(type, btn) {
@@ -596,6 +731,7 @@ function setTypeFilter(type, btn) {
 function applyFilters() {
   currentTopicFilter = document.getElementById('topicFilter').value;
   currentSourceFilter = document.getElementById('sourceFilter').value;
+  currentPollsterFilter = document.getElementById('pollsterFilter').value;
   renderPollList();
 }
 
@@ -608,6 +744,7 @@ function renderPollList() {
     if (currentTypeFilter !== 'all' && p.type !== currentTypeFilter) return false;
     if (currentTopicFilter !== 'all' && p.topic !== currentTopicFilter) return false;
     if (currentSourceFilter !== 'all' && p.source !== currentSourceFilter) return false;
+    if (currentPollsterFilter !== 'all' && p.pollster !== currentPollsterFilter) return false;
     return true;
   });
 
@@ -699,8 +836,9 @@ function buildTrackingChart(poll) {
   const ctx = document.getElementById('trackingChart').getContext('2d');
   if (chartInstance) chartInstance.destroy();
 
-  // Main series
-  const datasets = poll.series.map((s, i) => ({
+  // Main series — when a demographic overlay is active, only show "Immediate and urgent problem"
+  const mainSeries = activeDemographic ? poll.series.slice(0, 1) : poll.series;
+  const datasets = mainSeries.map((s, i) => ({
     label: s.name,
     data: s.data,
     borderColor: COLORS[i % COLORS.length],
@@ -728,8 +866,7 @@ function buildTrackingChart(poll) {
           pointRadius: 3,
           pointHoverRadius: 5,
           tension: 0.3,
-          fill: false,
-          spanGaps: true
+          fill: false
         });
       });
     }
@@ -775,7 +912,7 @@ function buildTrackingChart(poll) {
   // Legend
   const legendEl = document.getElementById('chartLegend');
   let datasetIndex = 0;
-  let legendHtml = poll.series.map((s, i) => {
+  let legendHtml = mainSeries.map((s, i) => {
     const idx = datasetIndex++;
     return `
     <div class="legend-item" onclick="toggleDataset(${idx}, this)">
@@ -815,6 +952,7 @@ function renderSnapshotPoll(poll) {
         <div class="info-chip"><span class="label">Source:</span>${poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
+        ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
       </div>
       <div class="snapshot-container" id="snapshotContainer"></div>
       ${poll.demographics ? '<div id="demographicSection"></div>' : ''}
