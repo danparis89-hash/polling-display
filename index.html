@@ -673,36 +673,12 @@ function renderTrackingPoll(poll) {
         <canvas id="trackingChart"></canvas>
         <div class="chart-legend" id="chartLegend"></div>
       </div>
-      <div class="chart-card">
-        <h3 style="font-size:0.9rem; margin-bottom:1rem; color:var(--text-muted);">Latest Values</h3>
-        <div id="latestValues"></div>
-      </div>
     </div>
   `;
 
   // Build chart
   buildTrackingChart(poll);
 
-  // Latest values
-  document.getElementById('latestValues').innerHTML = poll.series.map((s, i) => {
-    const latest = s.data[s.data.length - 1];
-    const prev = s.data[s.data.length - 2];
-    const diff = latest - prev;
-    const arrow = diff > 0 ? '&#9650;' : diff < 0 ? '&#9660;' : '&#8212;';
-    const diffColor = diff > 0 ? '#059669' : diff < 0 ? '#dc2626' : 'var(--text-muted)';
-    return `
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:0.5rem;">
-          <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
-          <span>${s.name}</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:1rem;">
-          <span style="font-weight:600;font-size:1.1rem;">${latest}%</span>
-          <span style="color:${diffColor};font-size:0.8rem;">${arrow} ${Math.abs(diff)}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
 }
 
 function toggleDataset(index, el) {
