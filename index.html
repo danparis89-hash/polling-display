@@ -292,6 +292,90 @@
       font-weight: 600;
     }
 
+    .bar-group {
+      margin-bottom: 1.25rem;
+    }
+    .bar-group-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      text-align: right;
+      width: 140px;
+      min-width: 140px;
+      margin-bottom: 0.3rem;
+      padding-right: 0;
+    }
+    .bar-group-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+    .bar-row-series {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.3rem;
+      gap: 0.75rem;
+    }
+    .bar-series-label {
+      width: 140px;
+      min-width: 140px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: right;
+      letter-spacing: 0.01em;
+    }
+    .bar-track-compact {
+      flex: 1;
+      height: 22px;
+      background: var(--bg);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill-compact {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fff;
+      transition: width 0.6s ease;
+      min-width: fit-content;
+    }
+    .bar-value-compact {
+      width: 50px;
+      min-width: 50px;
+      text-align: right;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .series-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1.5px solid;
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.15s, opacity 0.15s;
+      opacity: 0.45;
+    }
+    .series-toggle-btn.active {
+      opacity: 1;
+    }
+    .series-toggle-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
     /* Legend for line chart */
     .chart-legend {
       display: flex;
@@ -494,7 +578,7 @@ let polls = [
     type: "tracking",
     source: "Scottish Household Survey",
     pollster: "Ipsos",
-    topic: "Climate Change",
+    topic: "Climate change",
     sampleSize: "~10,000 households",
     frequency: "Annual",
     description: "Percentage of adults by their perception of climate change. Note: 2020 and 2021 data not available.",
@@ -553,7 +637,7 @@ let polls = [
     type: "snapshot",
     source: "Scottish Environment LINK",
     pollster: "Survation",
-    topic: "Nature",
+    topic: ["Nature", "Agriculture", "Marine"],
     sampleSize: "1,033",
     date: "November 2022",
     description: "Scottish public attitudes to nature and the natural environment.",
@@ -681,6 +765,222 @@ let polls = [
         ]
       }
     ]
+  },
+  {
+    id: "link-urban-rural-2024",
+    name: "Urban and rural attitudes",
+    type: "snapshot",
+    source: "Scottish Environment LINK",
+    pollster: "Diffley",
+    topic: ["Climate change", "Nature"],
+    sampleSize: "2,309",
+    date: "May 2024",
+    description: "Scottish public attitudes to nature and the environment, with rural and Highlands & Islands demographic breakdowns.",
+    questions: [
+      {
+        text: "To what extent, if at all, do you feel connected to the natural environment?",
+        options: [
+          { label: "NET: Connected", value: 77 },
+          { label: "NET: Not connected", value: 20 },
+          { label: "Don't know", value: 2 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "NET: Connected", value: 85 },
+            { label: "NET: Not connected", value: 13 },
+            { label: "Don't know", value: 2 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "NET: Connected", value: 83 },
+            { label: "NET: Not connected", value: 17 },
+            { label: "Don't know", value: 1 }
+          ]}
+        ]
+      },
+      {
+        text: "And how often do you visit nature (e.g., woodlands, coastal areas, lochs and rivers, local parks and gardens, etc.)?",
+        options: [
+          { label: "NET: Once a week or more", value: 57 },
+          { label: "NET: Less than once a week", value: 43 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "NET: Once a week or more", value: 70 },
+            { label: "NET: Less than once a week", value: 30 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "NET: Once a week or more", value: 67 },
+            { label: "NET: Less than once a week", value: 33 }
+          ]}
+        ]
+      },
+      {
+        text: "Are you a member of, or have you in the past 12 months made any donations to, any charities involved in nature conservation? (These may include charities such as the RSPB, the National Trust for Scotland, or Scottish Wildlife Trust, among others.)",
+        options: [
+          { label: "Currently a member", value: 9 },
+          { label: "Previously a member", value: 9 },
+          { label: "Donated in the last 12 months", value: 13 },
+          { label: "Donated prior to last 12 months", value: 9 },
+          { label: "None of the above", value: 69 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Currently a member", value: 14 },
+            { label: "Previously a member", value: 12 },
+            { label: "Donated in the last 12 months", value: 16 },
+            { label: "Donated prior to last 12 months", value: 13 },
+            { label: "None of the above", value: 54 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Currently a member", value: 8 },
+            { label: "Previously a member", value: 10 },
+            { label: "Donated in the last 12 months", value: 16 },
+            { label: "Donated prior to last 12 months", value: 9 },
+            { label: "None of the above", value: 64 }
+          ]}
+        ]
+      },
+      {
+        text: "How well informed, if at all, do you think you are about issues affecting the natural environment?",
+        options: [
+          { label: "NET: Informed", value: 69 },
+          { label: "NET: Not informed", value: 29 },
+          { label: "Don't know", value: 2 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "NET: Informed", value: 79 },
+            { label: "NET: Not informed", value: 18 },
+            { label: "Don't know", value: 3 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "NET: Informed", value: 80 },
+            { label: "NET: Not informed", value: 19 },
+            { label: "Don't know", value: 1 }
+          ]}
+        ]
+      },
+      {
+        text: "Before today, how much, if anything, did you know about the following concepts? (% knowing a fair amount or more)",
+        options: [
+          { label: "Climate Change", value: 78 },
+          { label: "Net Zero", value: 52 },
+          { label: "Nature Restoration", value: 40 },
+          { label: "Rewilding", value: 41 },
+          { label: "Sustainable/Regenerative Agriculture", value: 35 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Climate Change", value: 80 },
+            { label: "Net Zero", value: 59 },
+            { label: "Nature Restoration", value: 47 },
+            { label: "Rewilding", value: 55 },
+            { label: "Sustainable/Regenerative Agriculture", value: 43 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Climate Change", value: 80 },
+            { label: "Net Zero", value: 53 },
+            { label: "Nature Restoration", value: 42 },
+            { label: "Rewilding", value: 48 },
+            { label: "Sustainable/Regenerative Agriculture", value: 39 }
+          ]}
+        ]
+      },
+      {
+        text: "How often, if at all, do you worry about the natural environment (e.g., impacts of climate change, nature loss, etc.)?",
+        options: [
+          { label: "NET: Often/Occasionally", value: 76 },
+          { label: "NET: Rarely/Never", value: 23 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "NET: Often/Occasionally", value: 75 },
+            { label: "NET: Rarely/Never", value: 25 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "NET: Often/Occasionally", value: 81 },
+            { label: "NET: Rarely/Never", value: 19 }
+          ]}
+        ]
+      },
+      {
+        text: "How concerned, if at all, are you about the impact of climate change on food production in Scotland?",
+        options: [
+          { label: "NET: Concerned", value: 66 },
+          { label: "NET: Not concerned", value: 31 },
+          { label: "Don't know", value: 4 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "NET: Concerned", value: 64 },
+            { label: "NET: Not concerned", value: 33 },
+            { label: "Don't know", value: 3 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "NET: Concerned", value: 63 },
+            { label: "NET: Not concerned", value: 35 },
+            { label: "Don't know", value: 2 }
+          ]}
+        ]
+      },
+      {
+        text: "Have you taken or considered taking action to reduce your environmental impact, such as changing how you travel, what you eat, or what you buy?",
+        options: [
+          { label: "NET: Taken Action", value: 69 },
+          { label: "— Have taken action and look to continue", value: 43 },
+          { label: "— Have taken action but not looking to do more", value: 25 },
+          { label: "NET: Not Taken Action", value: 31 },
+          { label: "— Have considered taking action", value: 14 },
+          { label: "— Have not considered taking action", value: 17 }
+        ]
+      },
+      {
+        text: "In your lifetime, have you noticed any of the following in your local area:",
+        options: [
+          { label: "Impacts of climate change", value: 68 },
+          { label: "Impacts of nature loss", value: 45 },
+          { label: "Impacts of pollution", value: 34 },
+          { label: "None of the above", value: 18 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Impacts of climate change", value: 66 },
+            { label: "Impacts of nature loss", value: 47 },
+            { label: "Impacts of pollution", value: 32 },
+            { label: "None of the above", value: 22 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Impacts of climate change", value: 65 },
+            { label: "Impacts of nature loss", value: 46 },
+            { label: "Impacts of pollution", value: 32 },
+            { label: "None of the above", value: 21 }
+          ]}
+        ]
+      },
+      {
+        text: "How vulnerable, if at all, do you believe the following types of communities are to the effects of climate change? (NET: Vulnerable)",
+        options: [
+          { label: "Coastal areas", value: 87 },
+          { label: "Rural areas", value: 75 },
+          { label: "Urban areas (towns and cities)", value: 64 },
+          { label: "Your local area", value: 58 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Coastal areas", value: 81 },
+            { label: "Rural areas", value: 70 },
+            { label: "Urban areas (towns and cities)", value: 56 },
+            { label: "Your local area", value: 56 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Coastal areas", value: 86 },
+            { label: "Rural areas", value: 70 },
+            { label: "Urban areas (towns and cities)", value: 61 },
+            { label: "Your local area", value: 60 }
+          ]}
+        ]
+      }
+    ]
   }
 ];
 
@@ -699,12 +999,13 @@ let currentPollsterFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
 let activeDemographic = null; // name of active demographic group or null
+let visibleSeries = new Set(['National']); // for snapshot polls with per-question demographics
 
 // ──────────────────────────────────────────────
 // FILTERS
 // ──────────────────────────────────────────────
 function populateFilterDropdowns() {
-  const topics = [...new Set(polls.map(p => p.topic).filter(Boolean))].sort();
+  const topics = [...new Set(polls.flatMap(p => Array.isArray(p.topic) ? p.topic : (p.topic ? [p.topic] : [])))].sort();
   const sources = [...new Set(polls.map(p => p.source).filter(Boolean))].sort();
   const pollsters = [...new Set(polls.map(p => p.pollster).filter(Boolean))].sort();
 
@@ -742,7 +1043,7 @@ function renderPollList() {
   const list = document.getElementById('pollList');
   const filtered = polls.filter(p => {
     if (currentTypeFilter !== 'all' && p.type !== currentTypeFilter) return false;
-    if (currentTopicFilter !== 'all' && p.topic !== currentTopicFilter) return false;
+    if (currentTopicFilter !== 'all' && !(Array.isArray(p.topic) ? p.topic.includes(currentTopicFilter) : p.topic === currentTopicFilter)) return false;
     if (currentSourceFilter !== 'all' && p.source !== currentSourceFilter) return false;
     if (currentPollsterFilter !== 'all' && p.pollster !== currentPollsterFilter) return false;
     return true;
@@ -753,7 +1054,16 @@ function renderPollList() {
     return;
   }
 
-  list.innerHTML = filtered.map(p => `
+  const getPollDate = p => p.type === 'tracking'
+    ? new Date(p.labels[p.labels.length - 1])
+    : new Date(p.date);
+  const sorted = [...filtered].sort((a, b) => {
+    const typeRank = t => t === 'tracking' ? 0 : 1;
+    if (typeRank(a.type) !== typeRank(b.type)) return typeRank(a.type) - typeRank(b.type);
+    return getPollDate(b) - getPollDate(a);
+  });
+
+  list.innerHTML = sorted.map(p => `
     <div class="poll-item ${activePollId === p.id ? 'active' : ''}"
          onclick="selectPoll('${p.id}')">
       <div class="poll-name">${p.name}</div>
@@ -761,7 +1071,7 @@ function renderPollList() {
         <span class="poll-type-badge ${p.type === 'tracking' ? 'badge-tracking' : 'badge-snapshot'}">
           ${p.type}
         </span>
-        ${p.topic ? `<span class="poll-type-badge badge-topic">${p.topic}</span>` : ''}
+        ${p.topic ? `<span class="poll-type-badge badge-topic">${Array.isArray(p.topic) ? p.topic.join(', ') : p.topic}</span>` : ''}
       </div>
     </div>
   `).join('');
@@ -772,7 +1082,12 @@ function renderPollList() {
 // ──────────────────────────────────────────────
 function selectPoll(id) {
   activePollId = id;
+  activeDemographic = null;
   const poll = polls.find(p => p.id === id);
+  if (poll.type === 'snapshot' && poll.questions?.some(q => q.demographics)) {
+    const demoNames = poll.questions.find(q => q.demographics).demographics.map(d => d.name);
+    visibleSeries = new Set(['National', ...demoNames]);
+  }
   renderPollList();
 
   if (poll.type === 'tracking') {
@@ -829,7 +1144,19 @@ function toggleDataset(index, el) {
 function setDemographicOverlay(name) {
   activeDemographic = name;
   const poll = polls.find(p => p.id === activePollId);
-  if (poll) renderTrackingPoll(poll);
+  if (!poll) return;
+  if (poll.type === 'tracking') renderTrackingPoll(poll);
+  else renderSnapshotPoll(poll);
+}
+
+function toggleSnapshotSeries(name) {
+  if (visibleSeries.has(name)) {
+    if (visibleSeries.size > 1) visibleSeries.delete(name);
+  } else {
+    visibleSeries.add(name);
+  }
+  const poll = polls.find(p => p.id === activePollId);
+  if (poll) renderSnapshotPoll(poll);
 }
 
 function buildTrackingChart(poll) {
@@ -942,6 +1269,11 @@ function buildTrackingChart(poll) {
 // ──────────────────────────────────────────────
 function renderSnapshotPoll(poll) {
   const main = document.getElementById('mainContent');
+  const hasSeriesData = poll.questions && poll.questions.some(q => q.demographics);
+  const demoNames = hasSeriesData ? poll.questions.find(q => q.demographics).demographics.map(d => d.name) : [];
+  const allSeriesNames = hasSeriesData ? ['National', ...demoNames] : [];
+  const seriesColors = ['#4a90d9', '#2ecc71', '#9b59b6'];
+
   main.innerHTML = `
     <div class="poll-display">
       <div class="poll-title-bar">
@@ -954,6 +1286,17 @@ function renderSnapshotPoll(poll) {
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
         ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
       </div>
+      ${hasSeriesData ? `
+      <div style="margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Show:</span>
+        ${allSeriesNames.map((name, i) => {
+          const color = seriesColors[i % seriesColors.length];
+          const active = visibleSeries.has(name);
+          return `<button class="series-toggle-btn ${active ? 'active' : ''}" style="border-color:${color};color:${color};" onclick="toggleSnapshotSeries('${name}')">
+            <span class="series-toggle-dot" style="background:${active ? color : 'transparent'};border:2px solid ${color};"></span>${name}
+          </button>`;
+        }).join('')}
+      </div>` : ''}
       <div class="snapshot-container" id="snapshotContainer"></div>
       ${poll.demographics ? '<div id="demographicSection"></div>' : ''}
     </div>
@@ -961,30 +1304,61 @@ function renderSnapshotPoll(poll) {
 
   const container = document.getElementById('snapshotContainer');
   container.innerHTML = poll.questions.map(q => {
-    const maxVal = 100;
-    const bars = q.options.map((opt, i) => {
-      const color = COLORS[i % COLORS.length];
-      const width = (opt.value / maxVal) * 100;
-      return `
-        <div class="bar-row">
-          <div class="bar-label">${opt.label}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${width}%;background:${color};">${opt.value > 8 ? opt.value + '%' : ''}</div>
+    if (!hasSeriesData) {
+      // Simple single-series rendering
+      const bars = q.options.map((opt, i) => {
+        const color = COLORS[i % COLORS.length];
+        const width = (opt.value / 100) * 100;
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${opt.label}</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${width}%;background:${color};">${opt.value > 8 ? opt.value + '%' : ''}</div>
+            </div>
+            <div class="bar-value" style="color:${color}">${opt.value}%</div>
           </div>
-          <div class="bar-value" style="color:${color}">${opt.value}%</div>
+        `;
+      }).join('');
+      return `<div class="snapshot-question"><h3>${q.text}</h3>${bars}</div>`;
+    }
+
+    // Multi-series: group bars by option, one bar per visible series
+    const seriesData = [
+      { name: 'National', options: q.options },
+      ...(q.demographics ?? [])
+    ];
+    const activeSeriesList = allSeriesNames
+      .map((name, i) => ({ name, color: seriesColors[i % seriesColors.length], options: seriesData.find(s => s.name === name)?.options ?? [] }))
+      .filter(s => visibleSeries.has(s.name) && s.options.length > 0);
+
+    const groups = q.options.map((opt, optIdx) => {
+      const seriesBars = activeSeriesList.map(s => {
+        const val = s.options[optIdx]?.value ?? 0;
+        const width = (val / 100) * 100;
+        return `
+          <div class="bar-row-series">
+            <div class="bar-series-label" style="color:${s.color};">${s.name}</div>
+            <div class="bar-track-compact">
+              <div class="bar-fill-compact" style="width:${width}%;background:${s.color};">${val > 8 ? val + '%' : ''}</div>
+            </div>
+            <div class="bar-value-compact" style="color:${s.color};">${val}%</div>
+          </div>
+        `;
+      }).join('');
+      return `
+        <div class="bar-group">
+          <div class="bar-group-header">
+            <div class="bar-group-label">${opt.label}</div>
+          </div>
+          ${seriesBars}
         </div>
       `;
     }).join('');
 
-    return `
-      <div class="snapshot-question">
-        <h3>${q.text}</h3>
-        ${bars}
-      </div>
-    `;
+    return `<div class="snapshot-question"><h3>${q.text}</h3>${groups}</div>`;
   }).join('');
 
-  // Demographics (snapshot uses bar charts for point-in-time breakdowns)
+  // Legacy flat demographics (snapshot uses bar charts for point-in-time breakdowns)
   if (poll.demographics) {
     const section = document.getElementById('demographicSection');
     section.innerHTML = poll.demographics.map(demo => {
