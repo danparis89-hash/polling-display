@@ -1,71 +1,58 @@
 [
   {
-    "id": "shs-climate-urgency",
-    "name": "Climate Change: Immediate and Urgent Problem",
+    "id": "shs-climate-perceptions",
+    "name": "Perceptions about Climate Change",
     "type": "tracking",
     "source": "Scottish Household Survey",
     "topic": "Climate Change",
     "sampleSize": "~10,000 households",
     "frequency": "Annual",
-    "description": "Percentage of adults who agree that 'climate change is an immediate and urgent problem'. Question first included in SHS in 2013. Note: 2020 and 2021 data collected by telephone due to COVID-19 and published as experimental statistics — not directly comparable to face-to-face years.",
-    "labels": ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020*", "2021*", "2022", "2023"],
+    "description": "Percentage of adults by their perception of climate change. Note: 2020 and 2021 data not available.",
+    "labels": ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"],
     "series": [
-      { "name": "Agree", "data": [46, 45, 50, 55, 61, 65, 68, 80, 83, 74, 74] }
+      { "name": "Immediate and urgent problem", "data": [46, 45, 50, 55, 61, 65, 68, null, null, 74, 74] },
+      { "name": "More of a problem for the future", "data": [25, 26, 23, 23, 18, 16, 14, null, null, 12, 11] },
+      { "name": "Not really a problem", "data": [7, 8, 7, 6, 5, 4, 3, null, null, 3, 3] },
+      { "name": "Not convinced it is happening", "data": [13, 11, 11, 9, 8, 7, 6, null, null, 5, 6] }
     ],
     "demographics": [
+      {
+        "name": "Deprivation (SIMD)",
+        "series": [
+          { "name": "Quintile 1 - most deprived", "data": [39, 44, 44, 42, 50, 52, 60, null, null, 65, 64] },
+          { "name": "Quintile 2", "data": [44, 44, 45, 52, 52, 50, 63, null, null, 69, 73] },
+          { "name": "Quintile 3", "data": [47, 45, 51, 57, 64, 65, 71, null, null, 72, 72] },
+          { "name": "Quintile 4", "data": [47, 50, 51, 57, 66, 70, 72, null, null, 76, 76] },
+          { "name": "Quintile 5 - least deprived", "data": [52, 54, 58, 60, 72, 75, 76, null, null, 85, 82] }
+        ]
+      },
+      {
+        "name": "Urban/Rural",
+        "series": [
+          { "name": "Large urban areas", "data": [48, 50, 55, 59, 67, 71, 71, null, null, 77, 78] },
+          { "name": "Small accessible towns", "data": [41, 44, 45, 52, 64, 64, 68, null, null, 78, 74] },
+          { "name": "Accessible rural", "data": [49, 45, 49, 54, 56, 60, 69, null, null, 69, 73] },
+          { "name": "Other urban", "data": [43, 42, 46, 52, 58, 62, 66, null, null, 73, 70] },
+          { "name": "Small remote towns", "data": [48, 41, 44, 56, 56, 55, 62, null, null, 71, 69] },
+          { "name": "Remote rural", "data": [44, 47, 53, 54, 55, 56, 69, null, null, 72, 68] }
+        ]
+      },
       {
         "name": "Age",
         "series": [
-          { "name": "16–24", "data": [38, 40, 46, null, 58, 67, 69, null, null, 60, null] },
-          { "name": "25–34", "data": [47, null, null, null, null, null, 67, null, null, 78, null] },
-          { "name": "35–44", "data": [54, null, null, null, null, null, 72, null, null, null, null] },
-          { "name": "45–59", "data": [51, null, null, null, null, null, 72, null, null, null, null] },
-          { "name": "60–74", "data": [42, null, null, null, null, null, 68, null, null, null, null] },
-          { "name": "75+", "data": [33, null, null, null, null, 46, 56, null, null, 65, null] }
+          { "name": "16 to 24", "data": [38, 40, 46, 53, 58, 67, 69, null, null, 60, 71] },
+          { "name": "25 to 34", "data": [47, 45, 45, 54, 68, 67, 67, null, null, 78, 81] },
+          { "name": "35 to 44", "data": [54, 52, 58, 61, 70, 72, 72, null, null, 77, 77] },
+          { "name": "45 to 59", "data": [51, 51, 54, 57, 62, 68, 72, null, null, 77, 75] },
+          { "name": "60 to 74", "data": [42, 43, 50, 58, 58, 58, 68, null, null, 76, 69] },
+          { "name": "75 plus", "data": [33, 31, 36, 37, 44, 46, 56, null, null, 65, 65] }
         ]
       },
       {
-        "name": "Gender",
+        "name": "Sex",
         "series": [
-          { "name": "Male", "data": [null, null, null, null, null, null, 66, null, null, 74, null] },
-          { "name": "Female", "data": [null, null, null, null, null, null, 70, null, null, 74, null] }
-        ]
-      },
-      {
-        "name": "Education",
-        "series": [
-          { "name": "Degree or professional", "data": [null, null, null, null, null, null, 80, null, null, 86, 84] },
-          { "name": "No qualifications", "data": [null, null, null, null, null, null, 49, null, null, 58, 62] }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "shs-greenspace-satisfaction-2023",
-    "name": "Satisfaction with Nearest Green or Blue Space (2023)",
-    "type": "snapshot",
-    "source": "Scottish Household Survey",
-    "topic": "Green & Blue Spaces",
-    "sampleSize": "~10,000 households",
-    "date": "2023",
-    "description": "Satisfaction with nearest green or blue space, 2023. The overall satisfaction level (76% very or fairly satisfied) has remained at a similar level throughout the time series. Not asked in 2018 or 2022.",
-    "questions": [
-      {
-        "text": "How satisfied are you with your nearest green or blue space?",
-        "options": [
-          { "label": "Very or fairly satisfied", "value": 76 },
-          { "label": "Neither / no opinion", "value": 14 },
-          { "label": "Very or fairly dissatisfied", "value": 10 }
-        ]
-      }
-    ],
-    "demographics": [
-      {
-        "name": "Deprivation",
-        "text": "Satisfaction (very/fairly) by SIMD quintile (SHS 2023)",
-        "options": [
-          { "label": "Most deprived 20%", "value": 64 },
-          { "label": "Least deprived 20%", "value": 82 }
+          { "name": "Male", "data": [45, 45, 49, 55, 61, 66, 66, null, null, 74, 72] },
+          { "name": "Female", "data": [47, 46, 50, 55, 61, 63, 70, null, null, 74, 76] }
         ]
       }
     ]
