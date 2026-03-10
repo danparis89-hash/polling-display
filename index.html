@@ -732,6 +732,7 @@ function buildTrackingChart(poll) {
     type: 'line',
     data: { labels: poll.labels, datasets },
     options: {
+      animation: false,
       responsive: true,
       maintainAspectRatio: true,
       interaction: { mode: 'index', intersect: false },
