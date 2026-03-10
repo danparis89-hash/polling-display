@@ -549,9 +549,9 @@ let polls = [
   },
   {
     id: "link-nature-2022",
-    name: "LINK Nature Poll 2022",
+    name: "Attitude to Nature 2022",
     type: "snapshot",
-    source: "LINK 2022 poll",
+    source: "Scottish Environment LINK",
     pollster: "Survation",
     topic: "Nature",
     sampleSize: "1,033",
@@ -563,6 +563,14 @@ let polls = [
         options: [
           { label: "NET Important", value: 96 },
           { label: "NET Unimportant", value: 3 },
+          { label: "Don't Know", value: 1 }
+        ]
+      },
+      {
+        text: "How important is the natural environment to you personally?",
+        options: [
+          { label: "NET: Important", value: 92 },
+          { label: "NET: Unimportant", value: 7 },
           { label: "Don't Know", value: 1 }
         ]
       }
@@ -838,6 +846,7 @@ function renderSnapshotPoll(poll) {
         <div class="info-chip"><span class="label">Source:</span>${poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
+        ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
       </div>
       <div class="snapshot-container" id="snapshotContainer"></div>
       ${poll.demographics ? '<div id="demographicSection"></div>' : ''}
