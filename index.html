@@ -475,27 +475,27 @@ let polls = [
     demographics: [
       {
         name: "Age",
-        text: "Agreement by age group (SHS 2022)",
-        options: [
-          { label: "16\u201324", value: 60 },
-          { label: "25\u201334", value: 78 },
-          { label: "75+", value: 65 }
+        series: [
+          { name: "16\u201324", data: [38, 40, 46, null, 58, 67, 69, null, null, 60, null] },
+          { name: "25\u201334", data: [47, null, null, null, null, null, 67, null, null, 78, null] },
+          { name: "35\u201344", data: [54, null, null, null, null, null, 72, null, null, null, null] },
+          { name: "45\u201359", data: [51, null, null, null, null, null, 72, null, null, null, null] },
+          { name: "60\u201374", data: [42, null, null, null, null, null, 68, null, null, null, null] },
+          { name: "75+", data: [33, null, null, null, null, 46, 56, null, null, 65, null] }
         ]
       },
       {
         name: "Gender",
-        text: "Agreement by gender (SHS 2022)",
-        options: [
-          { label: "Male", value: 74 },
-          { label: "Female", value: 74 }
+        series: [
+          { name: "Male", data: [null, null, null, null, null, null, 66, null, null, 74, null] },
+          { name: "Female", data: [null, null, null, null, null, null, 70, null, null, 74, null] }
         ]
       },
       {
         name: "Education",
-        text: "Agreement by highest qualification (SHS 2023)",
-        options: [
-          { label: "Degree or professional", value: 84 },
-          { label: "No qualifications", value: 62 }
+        series: [
+          { name: "Degree or professional", data: [null, null, null, null, null, null, 80, null, null, 86, 84] },
+          { name: "No qualifications", data: [null, null, null, null, null, null, 49, null, null, 58, 62] }
         ]
       }
     ]
@@ -532,6 +532,11 @@ let polls = [
   }
 ];
 
+// Demographic overlay colors (distinct from the main series blue)
+const DEMO_COLORS = [
+  '#ff6c8c', '#8cff6c', '#ffb86c', '#c06cff', '#6cffe0', '#ff6ce0'
+];
+
 // ──────────────────────────────────────────────
 // APP STATE
 // ──────────────────────────────────────────────
@@ -540,6 +545,7 @@ let currentTopicFilter = 'all';
 let currentSourceFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
+let activeDemographic = null; // name of active demographic group or null
 
 // ──────────────────────────────────────────────
 // FILTERS
@@ -632,6 +638,14 @@ function renderTrackingPoll(poll) {
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Frequency:</span>${poll.frequency}</div>
       </div>
+      ${poll.demographics ? `
+      <div style="margin-bottom:0.75rem;">
+        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-right:0.5rem;">Demographic overlay:</span>
+        <div class="demo-tabs" id="demoToggleTabs" style="display:inline-flex;">
+          <button class="demo-tab ${!activeDemographic ? 'active' : ''}" onclick="setDemographicOverlay(null)">None</button>
+          ${poll.demographics.map(d => `<button class="demo-tab ${activeDemographic === d.name ? 'active' : ''}" onclick="setDemographicOverlay('${d.name}')">${d.name}</button>`).join('')}
+        </div>
+      </div>` : ''}
       <div class="chart-card">
         <canvas id="trackingChart"></canvas>
         <div class="chart-legend" id="chartLegend"></div>
@@ -640,68 +654,11 @@ function renderTrackingPoll(poll) {
         <h3 style="font-size:0.9rem; margin-bottom:1rem; color:var(--text-muted);">Latest Values</h3>
         <div id="latestValues"></div>
       </div>
-      ${poll.demographics ? '<div id="demographicSection"></div>' : ''}
     </div>
   `;
 
   // Build chart
-  const ctx = document.getElementById('trackingChart').getContext('2d');
-  if (chartInstance) chartInstance.destroy();
-
-  const datasets = poll.series.map((s, i) => ({
-    label: s.name,
-    data: s.data,
-    borderColor: COLORS[i % COLORS.length],
-    backgroundColor: COLORS[i % COLORS.length] + '18',
-    borderWidth: 2.5,
-    pointRadius: 4,
-    pointHoverRadius: 6,
-    tension: 0.3,
-    fill: false
-  }));
-
-  chartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { labels: poll.labels, datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a1d2e',
-          borderColor: '#2e3348',
-          borderWidth: 1,
-          titleColor: '#e4e6f0',
-          bodyColor: '#e4e6f0',
-          padding: 12,
-          callbacks: {
-            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%`
-          }
-        }
-      },
-      scales: {
-        x: {
-          grid: { color: '#2e334830' },
-          ticks: { color: '#8b8fa8' }
-        },
-        y: {
-          min: 0,
-          grid: { color: '#2e334830' },
-          ticks: { color: '#8b8fa8', callback: v => v + '%' }
-        }
-      }
-    }
-  });
-
-  // Legend
-  document.getElementById('chartLegend').innerHTML = poll.series.map((s, i) => `
-    <div class="legend-item">
-      <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
-      <span>${s.name}</span>
-    </div>
-  `).join('');
+  buildTrackingChart(poll);
 
   // Latest values
   document.getElementById('latestValues').innerHTML = poll.series.map((s, i) => {
@@ -723,52 +680,111 @@ function renderTrackingPoll(poll) {
       </div>
     `;
   }).join('');
-
-  // Demographics
-  if (poll.demographics) {
-    renderDemographicSection(poll);
-  }
 }
 
-// ──────────────────────────────────────────────
-// DEMOGRAPHIC BREAKDOWN (shared)
-// ──────────────────────────────────────────────
-function renderDemographicSection(poll, selectedIndex) {
-  const section = document.getElementById('demographicSection');
-  if (!section || !poll.demographics) return;
+function setDemographicOverlay(name) {
+  activeDemographic = name;
+  const poll = polls.find(p => p.id === activePollId);
+  if (poll) renderTrackingPoll(poll);
+}
 
-  const idx = selectedIndex !== undefined ? selectedIndex : 0;
-  const demo = poll.demographics[idx];
+function buildTrackingChart(poll) {
+  const ctx = document.getElementById('trackingChart').getContext('2d');
+  if (chartInstance) chartInstance.destroy();
 
-  const tabs = poll.demographics.map((d, i) =>
-    `<button class="demo-tab ${i === idx ? 'active' : ''}" onclick="renderDemographicSection(polls.find(p=>p.id==='${poll.id}'), ${i})">${d.name}</button>`
-  ).join('');
+  // Main series
+  const datasets = poll.series.map((s, i) => ({
+    label: s.name,
+    data: s.data,
+    borderColor: COLORS[i % COLORS.length],
+    backgroundColor: COLORS[i % COLORS.length] + '18',
+    borderWidth: 2.5,
+    pointRadius: 4,
+    pointHoverRadius: 6,
+    tension: 0.3,
+    fill: false
+  }));
 
-  const maxVal = 100;
-  const bars = demo.options.map((opt, i) => {
-    const color = COLORS[i % COLORS.length];
-    const width = (opt.value / maxVal) * 100;
-    return `
-      <div class="bar-row">
-        <div class="bar-label">${opt.label}</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${width}%;background:${color};">${opt.value > 8 ? opt.value + '%' : ''}</div>
-        </div>
-        <div class="bar-value" style="color:${color}">${opt.value}%</div>
-      </div>
-    `;
-  }).join('');
+  // Demographic overlay series
+  if (activeDemographic && poll.demographics) {
+    const demo = poll.demographics.find(d => d.name === activeDemographic);
+    if (demo) {
+      demo.series.forEach((s, i) => {
+        const color = DEMO_COLORS[i % DEMO_COLORS.length];
+        datasets.push({
+          label: s.name,
+          data: s.data,
+          borderColor: color,
+          backgroundColor: color + '18',
+          borderWidth: 2,
+          borderDash: [6, 3],
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          tension: 0.3,
+          fill: false,
+          spanGaps: true
+        });
+      });
+    }
+  }
 
-  section.innerHTML = `
-    <div class="demographic-section">
-      <h3>Demographic Breakdown</h3>
-      <div class="demo-tabs">${tabs}</div>
-      <div class="chart-card">
-        <h3 style="font-size:1.05rem; margin-bottom:1.25rem; font-weight:500;">${demo.text}</h3>
-        ${bars}
-      </div>
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels: poll.labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1d2e',
+          borderColor: '#2e3348',
+          borderWidth: 1,
+          titleColor: '#e4e6f0',
+          bodyColor: '#e4e6f0',
+          padding: 12,
+          filter: item => item.parsed.y !== null,
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: '#2e334830' },
+          ticks: { color: '#8b8fa8' }
+        },
+        y: {
+          min: 0,
+          grid: { color: '#2e334830' },
+          ticks: { color: '#8b8fa8', callback: v => v + '%' }
+        }
+      }
+    }
+  });
+
+  // Legend
+  const legendEl = document.getElementById('chartLegend');
+  let legendHtml = poll.series.map((s, i) => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
+      <span>${s.name}</span>
     </div>
-  `;
+  `).join('');
+
+  if (activeDemographic && poll.demographics) {
+    const demo = poll.demographics.find(d => d.name === activeDemographic);
+    if (demo) {
+      legendHtml += demo.series.map((s, i) => `
+        <div class="legend-item">
+          <div class="legend-dot" style="background:${DEMO_COLORS[i % DEMO_COLORS.length]};border:1px dashed ${DEMO_COLORS[i % DEMO_COLORS.length]}"></div>
+          <span>${s.name}</span>
+        </div>
+      `).join('');
+    }
+  }
+  legendEl.innerHTML = legendHtml;
 }
 
 // ──────────────────────────────────────────────
@@ -817,9 +833,31 @@ function renderSnapshotPoll(poll) {
     `;
   }).join('');
 
-  // Demographics
+  // Demographics (snapshot uses bar charts for point-in-time breakdowns)
   if (poll.demographics) {
-    renderDemographicSection(poll);
+    const section = document.getElementById('demographicSection');
+    section.innerHTML = poll.demographics.map(demo => {
+      if (!demo.options) return '';
+      const bars = demo.options.map((opt, i) => {
+        const color = COLORS[i % COLORS.length];
+        const width = (opt.value / 100) * 100;
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${opt.label}</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${width}%;background:${color};">${opt.value > 8 ? opt.value + '%' : ''}</div>
+            </div>
+            <div class="bar-value" style="color:${color}">${opt.value}%</div>
+          </div>
+        `;
+      }).join('');
+      return `
+        <div class="chart-card" style="margin-top:1rem;">
+          <h3 style="font-size:1.05rem; margin-bottom:1.25rem; font-weight:500;">${demo.text}</h3>
+          ${bars}
+        </div>
+      `;
+    }).join('');
   }
 }
 

@@ -15,27 +15,27 @@
     "demographics": [
       {
         "name": "Age",
-        "text": "Agreement by age group (SHS 2022)",
-        "options": [
-          { "label": "16–24", "value": 60 },
-          { "label": "25–34", "value": 78 },
-          { "label": "75+", "value": 65 }
+        "series": [
+          { "name": "16–24", "data": [38, 40, 46, null, 58, 67, 69, null, null, 60, null] },
+          { "name": "25–34", "data": [47, null, null, null, null, null, 67, null, null, 78, null] },
+          { "name": "35–44", "data": [54, null, null, null, null, null, 72, null, null, null, null] },
+          { "name": "45–59", "data": [51, null, null, null, null, null, 72, null, null, null, null] },
+          { "name": "60–74", "data": [42, null, null, null, null, null, 68, null, null, null, null] },
+          { "name": "75+", "data": [33, null, null, null, null, 46, 56, null, null, 65, null] }
         ]
       },
       {
         "name": "Gender",
-        "text": "Agreement by gender (SHS 2022)",
-        "options": [
-          { "label": "Male", "value": 74 },
-          { "label": "Female", "value": 74 }
+        "series": [
+          { "name": "Male", "data": [null, null, null, null, null, null, 66, null, null, 74, null] },
+          { "name": "Female", "data": [null, null, null, null, null, null, 70, null, null, 74, null] }
         ]
       },
       {
         "name": "Education",
-        "text": "Agreement by highest qualification (SHS 2023)",
-        "options": [
-          { "label": "Degree or professional", "value": 84 },
-          { "label": "No qualifications", "value": 62 }
+        "series": [
+          { "name": "Degree or professional", "data": [null, null, null, null, null, null, 80, null, null, 86, 84] },
+          { "name": "No qualifications", "data": [null, null, null, null, null, null, 49, null, null, 58, 62] }
         ]
       }
     ]
