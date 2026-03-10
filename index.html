@@ -7,14 +7,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg: #0f1117;
-      --surface: #1a1d2e;
-      --surface-hover: #242840;
-      --border: #2e3348;
-      --text: #e4e6f0;
-      --text-muted: #8b8fa8;
-      --accent: #6c8cff;
-      --accent-hover: #8da6ff;
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --surface-hover: #e8edf4;
+      --border: #d8dfe8;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --accent: #4f6df5;
+      --accent-hover: #3b5be0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,22 +27,25 @@
     }
 
     header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #4f6df5, #6d5bf7);
+      border-bottom: none;
       padding: 1.25rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(79, 109, 245, 0.25);
     }
 
     header h1 {
       font-size: 1.4rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.02em;
+      color: #fff;
     }
 
     header .subtitle {
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 0.85rem;
     }
 
@@ -60,6 +63,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
     }
 
     .sidebar-header {
@@ -93,11 +97,18 @@
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.15s;
+      font-weight: 500;
+    }
+
+    .filter-tab:hover {
+      background: var(--surface-hover);
+      color: var(--text);
     }
 
     .filter-tab.active {
       background: var(--accent);
       color: #fff;
+      box-shadow: 0 1px 4px rgba(79, 109, 245, 0.3);
     }
 
     .poll-list {
@@ -119,7 +130,7 @@
     }
 
     .poll-item.active {
-      background: var(--surface-hover);
+      background: #eef1fd;
       border-left: 3px solid var(--accent);
     }
 
@@ -147,10 +158,10 @@
       font-weight: 600;
     }
 
-    .badge-tracking { background: #1e3a5f; color: #6cb4ee; }
-    .badge-snapshot { background: #3a2a1e; color: #eeb86c; }
-    .badge-topic { background: #1e3a2a; color: #6ceeb8; }
-    .badge-demographic { background: #2e1e3a; color: #c06cff; }
+    .badge-tracking { background: #dbeafe; color: #2563eb; }
+    .badge-snapshot { background: #fef3c7; color: #d97706; }
+    .badge-topic { background: #d1fae5; color: #059669; }
+    .badge-demographic { background: #ede9fe; color: #7c3aed; }
 
     /* Main content */
     .main {
@@ -192,6 +203,7 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       font-size: 0.8rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .info-chip .label {
@@ -206,6 +218,7 @@
       border-radius: 12px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
 
     .chart-card canvas {
@@ -225,6 +238,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
 
     .snapshot-question h3 {
@@ -250,16 +264,16 @@
 
     .bar-track {
       flex: 1;
-      height: 28px;
+      height: 32px;
       background: var(--bg);
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
       position: relative;
     }
 
     .bar-fill {
       height: 100%;
-      border-radius: 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       padding-left: 10px;
@@ -400,12 +414,14 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
+      box-shadow: 0 1px 4px rgba(79, 109, 245, 0.3);
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #c1c9d4; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a0aab6; }
   </style>
 </head>
 <body>
@@ -415,7 +431,7 @@
     <h1>Polling Dashboard</h1>
     <div class="subtitle">Scottish environmental opinion polling</div>
   </div>
-  <div style="color: var(--text-muted); font-size: 0.8rem;">
+  <div style="color: rgba(255,255,255,0.75); font-size: 0.8rem;">
     Last updated: <span id="lastUpdated"></span>
   </div>
 </header>
@@ -461,8 +477,8 @@
 // ──────────────────────────────────────────────
 
 const COLORS = [
-  '#6c8cff', '#ff6c8c', '#8cff6c', '#ffb86c',
-  '#c06cff', '#6cffe0', '#ff6ce0', '#ffe06c'
+  '#4f6df5', '#e84393', '#00b894', '#fdcb6e',
+  '#6c5ce7', '#00cec9', '#e17055', '#74b9ff'
 ];
 
 let polls = [
@@ -541,7 +557,7 @@ let polls = [
 
 // Demographic overlay colors (distinct from the main series blue)
 const DEMO_COLORS = [
-  '#ff6c8c', '#8cff6c', '#ffb86c', '#c06cff', '#6cffe0', '#ff6ce0'
+  '#e84393', '#00b894', '#fdcb6e', '#6c5ce7', '#00cec9', '#e17055'
 ];
 
 // ──────────────────────────────────────────────
@@ -673,7 +689,7 @@ function renderTrackingPoll(poll) {
     const prev = s.data[s.data.length - 2];
     const diff = latest - prev;
     const arrow = diff > 0 ? '&#9650;' : diff < 0 ? '&#9660;' : '&#8212;';
-    const diffColor = diff > 0 ? '#8cff6c' : diff < 0 ? '#ff6c8c' : 'var(--text-muted)';
+    const diffColor = diff > 0 ? '#059669' : diff < 0 ? '#dc2626' : 'var(--text-muted)';
     return `
       <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:0.5rem;">
@@ -754,11 +770,11 @@ function buildTrackingChart(poll) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#1a1d2e',
-          borderColor: '#2e3348',
+          backgroundColor: '#ffffff',
+          borderColor: '#d8dfe8',
           borderWidth: 1,
-          titleColor: '#e4e6f0',
-          bodyColor: '#e4e6f0',
+          titleColor: '#1e293b',
+          bodyColor: '#1e293b',
           padding: 12,
           filter: item => item.parsed.y !== null,
           callbacks: {
@@ -768,13 +784,13 @@ function buildTrackingChart(poll) {
       },
       scales: {
         x: {
-          grid: { color: '#2e334830' },
-          ticks: { color: '#8b8fa8' }
+          grid: { color: '#e2e8f0' },
+          ticks: { color: '#64748b' }
         },
         y: {
           min: 0,
-          grid: { color: '#2e334830' },
-          ticks: { color: '#8b8fa8', callback: v => v + '%' }
+          grid: { color: '#e2e8f0' },
+          ticks: { color: '#64748b', callback: v => v + '%' }
         }
       }
     }
