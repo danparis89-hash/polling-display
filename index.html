@@ -637,7 +637,7 @@ let polls = [
     type: "snapshot",
     source: "Scottish Environment LINK",
     pollster: "Survation",
-    topic: "Nature",
+    topic: ["Nature", "Agriculture", "Marine"],
     sampleSize: "1,033",
     date: "November 2022",
     description: "Scottish public attitudes to nature and the natural environment.",
@@ -768,11 +768,11 @@ let polls = [
   },
   {
     id: "link-urban-rural-2024",
-    name: "Urban-rural divide",
+    name: "Urban and rural attitudes",
     type: "snapshot",
     source: "Scottish Environment LINK",
     pollster: "Diffley",
-    topic: ["Climate change", "Nature", "Agriculture"],
+    topic: ["Climate change", "Nature"],
     sampleSize: "2,309",
     date: "May 2024",
     description: "Scottish public attitudes to nature and the environment, with rural and Highlands & Islands demographic breakdowns.",
@@ -920,6 +920,63 @@ let polls = [
             { label: "NET: Concerned", value: 63 },
             { label: "NET: Not concerned", value: 35 },
             { label: "Don't know", value: 2 }
+          ]}
+        ]
+      },
+      {
+        text: "Have you taken or considered taking action to reduce your environmental impact, such as changing how you travel, what you eat, or what you buy?",
+        options: [
+          { label: "NET: Taken Action", value: 69 },
+          { label: "— Have taken action and look to continue", value: 43 },
+          { label: "— Have taken action but not looking to do more", value: 25 },
+          { label: "NET: Not Taken Action", value: 31 },
+          { label: "— Have considered taking action", value: 14 },
+          { label: "— Have not considered taking action", value: 17 }
+        ]
+      },
+      {
+        text: "In your lifetime, have you noticed any of the following in your local area:",
+        options: [
+          { label: "Impacts of climate change", value: 68 },
+          { label: "Impacts of nature loss", value: 45 },
+          { label: "Impacts of pollution", value: 34 },
+          { label: "None of the above", value: 18 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Impacts of climate change", value: 66 },
+            { label: "Impacts of nature loss", value: 47 },
+            { label: "Impacts of pollution", value: 32 },
+            { label: "None of the above", value: 22 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Impacts of climate change", value: 65 },
+            { label: "Impacts of nature loss", value: 46 },
+            { label: "Impacts of pollution", value: 32 },
+            { label: "None of the above", value: 21 }
+          ]}
+        ]
+      },
+      {
+        text: "How vulnerable, if at all, do you believe the following types of communities are to the effects of climate change? (NET: Vulnerable)",
+        options: [
+          { label: "Coastal areas", value: 87 },
+          { label: "Rural areas", value: 75 },
+          { label: "Urban areas (towns and cities)", value: 64 },
+          { label: "Your local area", value: 58 }
+        ],
+        demographics: [
+          { name: "Rural", options: [
+            { label: "Coastal areas", value: 81 },
+            { label: "Rural areas", value: 70 },
+            { label: "Urban areas (towns and cities)", value: 56 },
+            { label: "Your local area", value: 56 }
+          ]},
+          { name: "Highlands and Islands", options: [
+            { label: "Coastal areas", value: 86 },
+            { label: "Rural areas", value: 70 },
+            { label: "Urban areas (towns and cities)", value: 61 },
+            { label: "Your local area", value: 60 }
           ]}
         ]
       }
@@ -1263,7 +1320,7 @@ function renderSnapshotPoll(poll) {
     ];
     const activeSeriesList = allSeriesNames
       .map((name, i) => ({ name, color: seriesColors[i % seriesColors.length], options: seriesData.find(s => s.name === name)?.options ?? [] }))
-      .filter(s => visibleSeries.has(s.name));
+      .filter(s => visibleSeries.has(s.name) && s.options.length > 0);
 
     const groups = q.options.map((opt, optIdx) => {
       const seriesBars = activeSeriesList.map(s => {
