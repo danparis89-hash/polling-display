@@ -293,6 +293,13 @@
       align-items: center;
       gap: 0.4rem;
       font-size: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s;
+    }
+
+    .legend-item.hidden {
+      opacity: 0.35;
     }
 
     .legend-dot {
@@ -682,6 +689,14 @@ function renderTrackingPoll(poll) {
   }).join('');
 }
 
+function toggleDataset(index, el) {
+  if (!chartInstance) return;
+  const meta = chartInstance.getDatasetMeta(index);
+  meta.hidden = !meta.hidden;
+  el.classList.toggle('hidden', meta.hidden);
+  chartInstance.update();
+}
+
 function setDemographicOverlay(name) {
   activeDemographic = name;
   const poll = polls.find(p => p.id === activePollId);
@@ -767,22 +782,27 @@ function buildTrackingChart(poll) {
 
   // Legend
   const legendEl = document.getElementById('chartLegend');
-  let legendHtml = poll.series.map((s, i) => `
-    <div class="legend-item">
+  let datasetIndex = 0;
+  let legendHtml = poll.series.map((s, i) => {
+    const idx = datasetIndex++;
+    return `
+    <div class="legend-item" onclick="toggleDataset(${idx}, this)">
       <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
       <span>${s.name}</span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   if (activeDemographic && poll.demographics) {
     const demo = poll.demographics.find(d => d.name === activeDemographic);
     if (demo) {
-      legendHtml += demo.series.map((s, i) => `
-        <div class="legend-item">
+      legendHtml += demo.series.map((s, i) => {
+        const idx = datasetIndex++;
+        return `
+        <div class="legend-item" onclick="toggleDataset(${idx}, this)">
           <div class="legend-dot" style="background:${DEMO_COLORS[i % DEMO_COLORS.length]};border:1px dashed ${DEMO_COLORS[i % DEMO_COLORS.length]}"></div>
           <span>${s.name}</span>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
     }
   }
   legendEl.innerHTML = legendHtml;
