@@ -1054,7 +1054,16 @@ function renderPollList() {
     return;
   }
 
-  list.innerHTML = filtered.map(p => `
+  const getPollDate = p => p.type === 'tracking'
+    ? new Date(p.labels[p.labels.length - 1])
+    : new Date(p.date);
+  const sorted = [...filtered].sort((a, b) => {
+    const typeRank = t => t === 'tracking' ? 0 : 1;
+    if (typeRank(a.type) !== typeRank(b.type)) return typeRank(a.type) - typeRank(b.type);
+    return getPollDate(b) - getPollDate(a);
+  });
+
+  list.innerHTML = sorted.map(p => `
     <div class="poll-item ${activePollId === p.id ? 'active' : ''}"
          onclick="selectPoll('${p.id}')">
       <div class="poll-name">${p.name}</div>
