@@ -264,6 +264,18 @@
           { "label": "ALBA Party", "value": 19 },
           { "label": "Reform UK", "value": 17 }
         ]
+      },
+      {
+        "text": "In general, how would you characterise each party's approach to environmental issues? (NET: Anti-environment)",
+        "options": [
+          { "label": "Reform UK", "value": 32 },
+          { "label": "Scottish Conservatives", "value": 27 },
+          { "label": "Scottish Labour", "value": 12 },
+          { "label": "ALBA Party", "value": 12 },
+          { "label": "Scottish National Party", "value": 10 },
+          { "label": "Scottish Liberal Democrats", "value": 8 },
+          { "label": "Scottish Greens", "value": 5 }
+        ]
       }
     ]
   }
