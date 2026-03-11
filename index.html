@@ -751,45 +751,53 @@ let polls = [
       {
         text: "How important are environmental and climate issues to you when deciding which party to vote for? (By 2024 UK General Election vote)",
         partyGrouped: true,
+        answerColors: ['#4f6df5', '#74b9ff', '#f59e0b', '#ef4444', '#94a3b8'],
         options: [
-          { label: "NET: Important", value: 69 },
+          { label: "Very important", value: 26 },
+          { label: "Somewhat important", value: 44 },
           { label: "Not very important", value: 19 },
           { label: "Not at all important", value: 8 },
           { label: "Don't know", value: 4 }
         ],
         demographics: [
           { name: "Greens (2024)", options: [
-            { label: "NET: Important", value: 99 },
+            { label: "Very important", value: 65 },
+            { label: "Somewhat important", value: 34 },
             { label: "Not very important", value: 1 },
             { label: "Not at all important", value: 0 },
             { label: "Don't know", value: 0 }
           ]},
           { name: "SNP (2024)", options: [
-            { label: "NET: Important", value: 80 },
+            { label: "Very important", value: 32 },
+            { label: "Somewhat important", value: 48 },
             { label: "Not very important", value: 13 },
             { label: "Not at all important", value: 5 },
             { label: "Don't know", value: 2 }
           ]},
           { name: "Labour (2024)", options: [
-            { label: "NET: Important", value: 71 },
+            { label: "Very important", value: 27 },
+            { label: "Somewhat important", value: 45 },
             { label: "Not very important", value: 18 },
             { label: "Not at all important", value: 8 },
             { label: "Don't know", value: 2 }
           ]},
           { name: "Lib Dems (2024)", options: [
-            { label: "NET: Important", value: 69 },
+            { label: "Very important", value: 26 },
+            { label: "Somewhat important", value: 43 },
             { label: "Not very important", value: 27 },
             { label: "Not at all important", value: 4 },
             { label: "Don't know", value: 1 }
           ]},
           { name: "Reform UK (2024)", options: [
-            { label: "NET: Important", value: 55 },
+            { label: "Very important", value: 12 },
+            { label: "Somewhat important", value: 42 },
             { label: "Not very important", value: 31 },
             { label: "Not at all important", value: 14 },
             { label: "Don't know", value: 1 }
           ]},
           { name: "Conservatives (2024)", options: [
-            { label: "NET: Important", value: 53 },
+            { label: "Very important", value: 17 },
+            { label: "Somewhat important", value: 36 },
             { label: "Not very important", value: 29 },
             { label: "Not at all important", value: 16 },
             { label: "Don't know", value: 2 }
@@ -1496,7 +1504,7 @@ function buildTrackingChart(poll) {
 // PARTY-GROUPED QUESTION RENDERERS
 // ──────────────────────────────────────────────
 function renderPartyGroupedQuestion(q) {
-  const answerColors = ['#4f6df5', '#f59e0b', '#ef4444', '#94a3b8'];
+  const answerColors = q.answerColors || ['#4f6df5', '#f59e0b', '#ef4444', '#94a3b8'];
   const allGroups = [
     { name: 'All respondents', color: '#64748b', options: q.options },
     ...(q.demographics ?? []).map(d => ({ name: d.name, color: getPartyColor(d.name), options: d.options }))
