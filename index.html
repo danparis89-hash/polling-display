@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Opinion Polling Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" crossorigin="anonymous"></script>
   <style>
     :root {
       --bg: #f0f4f8;
@@ -1278,6 +1278,16 @@ function setTypeFilter(type, btn) {
   applyFilters();
 }
 
+function safeUrl(url) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' ? url : null;
+  } catch {
+    return null;
+  }
+}
+
 function applyFilters() {
   currentTopicFilter = document.getElementById('topicFilter').value;
   currentSourceFilter = document.getElementById('sourceFilter').value;
@@ -1358,7 +1368,7 @@ function renderTrackingPoll(poll) {
         <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
-        <div class="info-chip"><span class="label">Source:</span>${poll.sourceUrl ? `<a href="${poll.sourceUrl}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
+        <div class="info-chip"><span class="label">Source:</span>${safeUrl(poll.sourceUrl) ? `<a href="${safeUrl(poll.sourceUrl)}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Frequency:</span>${poll.frequency}</div>
       </div>
@@ -1593,7 +1603,7 @@ function renderSnapshotPoll(poll) {
         <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
-        <div class="info-chip"><span class="label">Source:</span>${poll.sourceUrl ? `<a href="${poll.sourceUrl}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
+        <div class="info-chip"><span class="label">Source:</span>${safeUrl(poll.sourceUrl) ? `<a href="${safeUrl(poll.sourceUrl)}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
         ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
