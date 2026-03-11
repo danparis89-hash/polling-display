@@ -56,5 +56,203 @@
         ]
       }
     ]
+  },
+  {
+    "id": "link-voting-2025",
+    "name": "Environment and voting intention",
+    "type": "snapshot",
+    "source": "Scottish Environment LINK",
+    "pollster": "Diffley",
+    "topic": ["Climate change", "Nature", "Voting intention"],
+    "sampleSize": "2,025",
+    "date": "October 2025",
+    "description": "Scottish public attitudes to the environment and climate change in the context of voting intention.",
+    "questions": [
+      {
+        "text": "On a scale from 0 to 10, where 0 is 'very unfavourable' and 10 is 'very favourable', how favourably do you view the following political parties? (NET: Favourable, 6–10)",
+        "options": [
+          { "label": "Scottish National Party (SNP)", "value": 38 },
+          { "label": "Reform UK", "value": 29 },
+          { "label": "Scottish Labour", "value": 29 },
+          { "label": "Scottish Liberal Democrats", "value": 24 },
+          { "label": "Scottish Greens", "value": 23 },
+          { "label": "Scottish Conservatives", "value": 22 },
+          { "label": "ALBA Party", "value": 13 }
+        ]
+      },
+      {
+        "text": "Which of the following issues are most important to you in this election? (Select up to five)",
+        "options": [
+          { "label": "Cost of living", "value": 75 },
+          { "label": "The NHS and health services", "value": 74 },
+          { "label": "The economy and jobs", "value": 51 },
+          { "label": "Immigration and asylum", "value": 45 },
+          { "label": "Education and schools", "value": 31 },
+          { "label": "Crime and policing", "value": 30 },
+          { "label": "Housing", "value": 28 },
+          { "label": "Climate change and the environment", "value": 27 },
+          { "label": "Scottish independence", "value": 23 },
+          { "label": "Transport and infrastructure", "value": 15 },
+          { "label": "Other", "value": 2 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should clean up rivers and prevent pollution.",
+        "options": [
+          { "label": "NET: Agree", "value": 83 },
+          { "label": "Neither agree nor disagree", "value": 12 },
+          { "label": "NET: Disagree", "value": 3 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should protect our seas from pollution, overfishing and damaging development.",
+        "options": [
+          { "label": "NET: Agree", "value": 81 },
+          { "label": "Neither agree nor disagree", "value": 13 },
+          { "label": "NET: Disagree", "value": 4 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should do more to help farming be resilient in the face of climate impacts.",
+        "options": [
+          { "label": "NET: Agree", "value": 76 },
+          { "label": "Neither agree nor disagree", "value": 18 },
+          { "label": "NET: Disagree", "value": 3 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should protect and restore Scotland's natural environment.",
+        "options": [
+          { "label": "NET: Agree", "value": 76 },
+          { "label": "Neither agree nor disagree", "value": 16 },
+          { "label": "NET: Disagree", "value": 4 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should increase the extent of native woodlands.",
+        "options": [
+          { "label": "NET: Agree", "value": 67 },
+          { "label": "Neither agree nor disagree", "value": 24 },
+          { "label": "NET: Disagree", "value": 5 },
+          { "label": "Don't know", "value": 4 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should increase investment in protecting the environment.",
+        "options": [
+          { "label": "NET: Agree", "value": 67 },
+          { "label": "Neither agree nor disagree", "value": 23 },
+          { "label": "NET: Disagree", "value": 7 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "To what extent do you agree or disagree? The next Scottish Government should take stronger action to reduce emissions and tackle climate change.",
+        "options": [
+          { "label": "NET: Agree", "value": 59 },
+          { "label": "Neither agree nor disagree", "value": 22 },
+          { "label": "NET: Disagree", "value": 16 },
+          { "label": "Don't know", "value": 3 }
+        ]
+      },
+      {
+        "text": "How important are environmental and climate issues to you when deciding which party to vote for? (By 2024 UK General Election vote)",
+        "options": [
+          { "label": "NET: Important", "value": 69 },
+          { "label": "Not very important", "value": 19 },
+          { "label": "Not at all important", "value": 8 },
+          { "label": "Don't know", "value": 4 }
+        ],
+        "demographics": [
+          { "name": "Greens (2024)", "options": [
+            { "label": "NET: Important", "value": 99 },
+            { "label": "Not very important", "value": 1 },
+            { "label": "Not at all important", "value": 0 },
+            { "label": "Don't know", "value": 0 }
+          ]},
+          { "name": "SNP (2024)", "options": [
+            { "label": "NET: Important", "value": 80 },
+            { "label": "Not very important", "value": 13 },
+            { "label": "Not at all important", "value": 5 },
+            { "label": "Don't know", "value": 2 }
+          ]},
+          { "name": "Labour (2024)", "options": [
+            { "label": "NET: Important", "value": 71 },
+            { "label": "Not very important", "value": 18 },
+            { "label": "Not at all important", "value": 8 },
+            { "label": "Don't know", "value": 2 }
+          ]},
+          { "name": "Lib Dems (2024)", "options": [
+            { "label": "NET: Important", "value": 69 },
+            { "label": "Not very important", "value": 27 },
+            { "label": "Not at all important", "value": 4 },
+            { "label": "Don't know", "value": 1 }
+          ]},
+          { "name": "Reform UK (2024)", "options": [
+            { "label": "NET: Important", "value": 55 },
+            { "label": "Not very important", "value": 31 },
+            { "label": "Not at all important", "value": 14 },
+            { "label": "Don't know", "value": 1 }
+          ]},
+          { "name": "Conservatives (2024)", "options": [
+            { "label": "NET: Important", "value": 53 },
+            { "label": "Not very important", "value": 29 },
+            { "label": "Not at all important", "value": 16 },
+            { "label": "Don't know", "value": 2 }
+          ]}
+        ]
+      },
+      {
+        "text": "How likely would you be to vote for a party if you felt they were not willing to take action on environmental issues? (By 2024 UK General Election vote)",
+        "options": [
+          { "label": "NET: Likely", "value": 19 },
+          { "label": "Neither likely nor unlikely", "value": 33 },
+          { "label": "NET: Unlikely", "value": 42 },
+          { "label": "Don't know", "value": 6 }
+        ],
+        "demographics": [
+          { "name": "Greens (2024)", "options": [
+            { "label": "NET: Likely", "value": 23 },
+            { "label": "Neither likely nor unlikely", "value": 10 },
+            { "label": "NET: Unlikely", "value": 67 },
+            { "label": "Don't know", "value": 0 }
+          ]},
+          { "name": "SNP (2024)", "options": [
+            { "label": "NET: Likely", "value": 22 },
+            { "label": "Neither likely nor unlikely", "value": 31 },
+            { "label": "NET: Unlikely", "value": 45 },
+            { "label": "Don't know", "value": 2 }
+          ]},
+          { "name": "Conservatives (2024)", "options": [
+            { "label": "NET: Likely", "value": 21 },
+            { "label": "Neither likely nor unlikely", "value": 45 },
+            { "label": "NET: Unlikely", "value": 27 },
+            { "label": "Don't know", "value": 8 }
+          ]},
+          { "name": "Reform UK (2024)", "options": [
+            { "label": "NET: Likely", "value": 21 },
+            { "label": "Neither likely nor unlikely", "value": 50 },
+            { "label": "NET: Unlikely", "value": 22 },
+            { "label": "Don't know", "value": 5 }
+          ]},
+          { "name": "Labour (2024)", "options": [
+            { "label": "NET: Likely", "value": 20 },
+            { "label": "Neither likely nor unlikely", "value": 33 },
+            { "label": "NET: Unlikely", "value": 44 },
+            { "label": "Don't know", "value": 3 }
+          ]},
+          { "name": "Lib Dems (2024)", "options": [
+            { "label": "NET: Likely", "value": 15 },
+            { "label": "Neither likely nor unlikely", "value": 38 },
+            { "label": "NET: Unlikely", "value": 41 },
+            { "label": "Don't know", "value": 6 }
+          ]}
+        ]
+      }
+    ]
   }
 ]
