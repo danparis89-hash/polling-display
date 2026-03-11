@@ -211,6 +211,15 @@
       margin-right: 0.4rem;
     }
 
+    .info-chip a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .info-chip a:hover {
+      text-decoration: underline;
+    }
+
     /* Chart container */
     .chart-card {
       background: var(--surface);
@@ -589,9 +598,10 @@ function getTextColorForBg(hex) {
 let polls = [
   {
     id: "shs-climate-perceptions",
-    name: "Perceptions about Climate Change",
+    name: "Perceptions about climate change",
     type: "tracking",
     source: "Scottish Household Survey",
+    sourceUrl: "https://www.gov.scot/collections/scottish-household-survey-publications/",
     pollster: "Ipsos",
     topic: "Climate change",
     sampleSize: "~10,000 households",
@@ -651,6 +661,7 @@ let polls = [
     name: "Environment and voting intention",
     type: "snapshot",
     source: "Scottish Environment LINK",
+    sourceUrl: "https://www.scotlink.org/publication/scottish-environment-link-measuring-public-attitudes-in-scotland-diffley-partnership/",
     pollster: "Diffley",
     topic: ["Climate change", "Nature", "Voting intention"],
     sampleSize: "2,025",
@@ -872,6 +883,7 @@ let polls = [
     name: "Attitudes to nature",
     type: "snapshot",
     source: "Scottish Environment LINK",
+    sourceUrl: "https://www.scotlink.org/publication/attitudes-to-nature-opinion-poll/",
     pollster: "Survation",
     topic: ["Nature", "Agriculture", "Marine"],
     sampleSize: "1,033",
@@ -1007,6 +1019,7 @@ let polls = [
     name: "Urban and rural attitudes",
     type: "snapshot",
     source: "Scottish Environment LINK",
+    sourceUrl: "https://www.scotlink.org/publication/polling-results-with-diffley-partnership-measuring-public-attitudes-in-scotland/",
     pollster: "Diffley",
     topic: ["Climate change", "Nature"],
     sampleSize: "2,309",
@@ -1345,7 +1358,7 @@ function renderTrackingPoll(poll) {
         <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
-        <div class="info-chip"><span class="label">Source:</span>${poll.source}</div>
+        <div class="info-chip"><span class="label">Source:</span>${poll.sourceUrl ? `<a href="${poll.sourceUrl}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Frequency:</span>${poll.frequency}</div>
       </div>
@@ -1580,7 +1593,7 @@ function renderSnapshotPoll(poll) {
         <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
-        <div class="info-chip"><span class="label">Source:</span>${poll.source}</div>
+        <div class="info-chip"><span class="label">Source:</span>${poll.sourceUrl ? `<a href="${poll.sourceUrl}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
         <div class="info-chip"><span class="label">Sample:</span>${poll.sampleSize}</div>
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
         ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
