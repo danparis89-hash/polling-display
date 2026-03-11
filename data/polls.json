@@ -252,6 +252,18 @@
             { "label": "Don't know", "value": 6 }
           ]}
         ]
+      },
+      {
+        "text": "In general, how would you characterise each party's approach to environmental issues? (NET: Pro-environment)",
+        "options": [
+          { "label": "Scottish Greens", "value": 68 },
+          { "label": "Scottish National Party", "value": 45 },
+          { "label": "Scottish Liberal Democrats", "value": 38 },
+          { "label": "Scottish Labour", "value": 34 },
+          { "label": "Scottish Conservatives", "value": 22 },
+          { "label": "ALBA Party", "value": 19 },
+          { "label": "Reform UK", "value": 17 }
+        ]
       }
     ]
   }
