@@ -63,7 +63,7 @@
     "type": "snapshot",
     "source": "Climate Outreach",
     "pollster": "More in Common",
-    "topic": "Climate Change",
+    "topic": ["Climate change"],
     "sampleSize": "",
     "date": "2024",
     "link": "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
