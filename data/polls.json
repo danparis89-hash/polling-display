@@ -58,6 +58,414 @@
     ]
   },
   {
+    "id": "more-in-common-climate-outreach-scotland-2024",
+    "name": "Climate Big Picture 2024 - Scotland",
+    "type": "snapshot",
+    "source": "Climate Outreach",
+    "pollster": "More in Common",
+    "topic": ["Climate change"],
+    "sampleSize": "",
+    "date": "2024",
+    "link": "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
+    "description": "Scottish public attitudes to climate change action, Net Zero, government performance, and public transport use.",
+    "questions": [
+      {
+        "text": "Relating to actions you can take to help tackle climate change, where do you place yourself on the following scale?",
+        "options": [
+          { "label": "1 - I am highly motivated to take action on climate change", "value": 16 },
+          { "label": "2", "value": 29 },
+          { "label": "3", "value": 35 },
+          { "label": "4", "value": 10 },
+          { "label": "5 - I am not concerned about taking action on climate change", "value": 8 },
+          { "label": "Don't know", "value": 1 }
+        ]
+      },
+      {
+        "text": "Do you think that reaching Net Zero will be...",
+        "options": [
+          { "label": "Very good for Scotland", "value": 28 },
+          { "label": "Mostly good for Scotland", "value": 33 },
+          { "label": "Neither good nor bad for Scotland", "value": 16 },
+          { "label": "Mostly bad for Scotland", "value": 8 },
+          { "label": "Very bad for Scotland", "value": 7 },
+          { "label": "Don't know", "value": 8 }
+        ]
+      },
+      {
+        "text": "On the issue of tackling our contribution to climate change, would you say the Scottish government is doing...",
+        "options": [
+          { "label": "A better job than the Westminster government", "value": 28 },
+          { "label": "About the same as the Westminster government", "value": 36 },
+          { "label": "A worse job than the Westminster government", "value": 18 },
+          { "label": "Don't know", "value": 17 }
+        ]
+      },
+      {
+        "text": "How often do you use public transport?",
+        "options": [
+          { "label": "Every day", "value": 9 },
+          { "label": "Around every other day", "value": 17 },
+          { "label": "Around once a week", "value": 21 },
+          { "label": "Around once a month", "value": 32 },
+          { "label": "Never", "value": 21 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "diffley-uplift-energy-2025",
+    "name": "Energy Survey - November 2025",
+    "type": "snapshot",
+    "source": "Uplift",
+    "pollster": "Diffley",
+    "topic": ["Climate Change", "Oil and gas"],
+    "sampleSize": "2,352",
+    "date": "November 2025",
+    "link": "https://diffleypartnership.co.uk/energy-survey-uplift-november-2025/",
+    "description": "Scottish public attitudes to climate change, North Sea oil and gas drilling, and the energy transition.",
+    "questions": [
+      {
+        "text": "How much, if at all, do you care about climate change as an issue?",
+        "options": [
+          { "label": "I care a lot about climate change", "value": 28 },
+          { "label": "I care a fair amount about climate change", "value": 39 },
+          { "label": "I care a little", "value": 24 },
+          { "label": "I do not care about climate change", "value": 9 },
+          { "label": "I don't know", "value": 1 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "I care a lot about climate change", "value": 26 },
+            { "label": "I care a fair amount about climate change", "value": 36 },
+            { "label": "I care a little", "value": 23 },
+            { "label": "I do not care about climate change", "value": 14 },
+            { "label": "I don't know", "value": 1 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "I care a lot about climate change", "value": 29 },
+            { "label": "I care a fair amount about climate change", "value": 41 },
+            { "label": "I care a little", "value": 24 },
+            { "label": "I do not care about climate change", "value": 5 },
+            { "label": "I don't know", "value": 2 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "I care a lot about climate change", "value": 33 },
+            { "label": "I care a fair amount about climate change", "value": 38 },
+            { "label": "I care a little", "value": 19 },
+            { "label": "I do not care about climate change", "value": 8 },
+            { "label": "I don't know", "value": 2 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "I care a lot about climate change", "value": 26 },
+            { "label": "I care a fair amount about climate change", "value": 35 },
+            { "label": "I care a little", "value": 27 },
+            { "label": "I do not care about climate change", "value": 10 },
+            { "label": "I don't know", "value": 1 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "I care a lot about climate change", "value": 22 },
+            { "label": "I care a fair amount about climate change", "value": 37 },
+            { "label": "I care a little", "value": 30 },
+            { "label": "I do not care about climate change", "value": 10 },
+            { "label": "I don't know", "value": 1 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "I care a lot about climate change", "value": 22 },
+            { "label": "I care a fair amount about climate change", "value": 42 },
+            { "label": "I care a little", "value": 25 },
+            { "label": "I do not care about climate change", "value": 11 },
+            { "label": "I don't know", "value": 1 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "I care a lot about climate change", "value": 30 },
+            { "label": "I care a fair amount about climate change", "value": 39 },
+            { "label": "I care a little", "value": 23 },
+            { "label": "I do not care about climate change", "value": 8 },
+            { "label": "I don't know", "value": 1 }
+          ]}
+        ]
+      },
+      {
+        "text": "To what extent, if at all, do you think that tackling climate change should be high on the agenda for the Scottish government?",
+        "options": [
+          { "label": "Low priority (0-3)", "value": 17 },
+          { "label": "Medium priority (4-6)", "value": 26 },
+          { "label": "High priority (7-10)", "value": 57 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "Low priority (0-3)", "value": 24 },
+            { "label": "Medium priority (4-6)", "value": 26 },
+            { "label": "High priority (7-10)", "value": 50 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "Low priority (0-3)", "value": 10 },
+            { "label": "Medium priority (4-6)", "value": 26 },
+            { "label": "High priority (7-10)", "value": 64 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "Low priority (0-3)", "value": 15 },
+            { "label": "Medium priority (4-6)", "value": 24 },
+            { "label": "High priority (7-10)", "value": 61 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "Low priority (0-3)", "value": 16 },
+            { "label": "Medium priority (4-6)", "value": 30 },
+            { "label": "High priority (7-10)", "value": 55 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "Low priority (0-3)", "value": 18 },
+            { "label": "Medium priority (4-6)", "value": 29 },
+            { "label": "High priority (7-10)", "value": 53 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "Low priority (0-3)", "value": 20 },
+            { "label": "Medium priority (4-6)", "value": 27 },
+            { "label": "High priority (7-10)", "value": 54 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "Low priority (0-3)", "value": 16 },
+            { "label": "Medium priority (4-6)", "value": 25 },
+            { "label": "High priority (7-10)", "value": 59 }
+          ]}
+        ]
+      },
+      {
+        "text": "Which of the following statements is closest to your view on what the Scottish Government should do when it comes to North Sea oil and gas drilling?",
+        "options": [
+          { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 8 },
+          { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 35 },
+          { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 57 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 6 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 47 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 47 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 10 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 23 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 67 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 10 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 24 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 66 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 7 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 33 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 61 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 8 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 35 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 57 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 8 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 44 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 48 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "Oppose new drilling to protect future generations, communities, and nature, even if it costs oil and gas jobs in the short term", "value": 7 },
+            { "label": "Support new drilling to protect jobs now, even if it worsens climate change, harming communities, nature, and future generations", "value": 41 },
+            { "label": "Oppose new drilling and invest in creating jobs in Scotland's clean energy industries to protect future generations", "value": 52 }
+          ]}
+        ]
+      },
+      {
+        "text": "Which of the following do you think is more likely to result in Scotland having a secure and affordable supply of energy in the future?",
+        "options": [
+          { "label": "More investment into North Sea oil and gas drilling", "value": 26 },
+          { "label": "More investment into renewables and energy efficiency measures", "value": 63 },
+          { "label": "Don't know", "value": 11 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 34 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 59 },
+            { "label": "Don't know", "value": 7 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 19 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 66 },
+            { "label": "Don't know", "value": 15 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 16 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 73 },
+            { "label": "Don't know", "value": 10 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 25 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 63 },
+            { "label": "Don't know", "value": 12 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 28 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 59 },
+            { "label": "Don't know", "value": 13 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 33 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 56 },
+            { "label": "Don't know", "value": 11 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "More investment into North Sea oil and gas drilling", "value": 32 },
+            { "label": "More investment into renewables and energy efficiency measures", "value": 57 },
+            { "label": "Don't know", "value": 11 }
+          ]}
+        ]
+      },
+      {
+        "text": "Which of the following do you think could/will provide the most opportunities for Scotland's energy workers in the next 5 years?",
+        "options": [
+          { "label": "Clean energy industries, including renewable energy", "value": 57 },
+          { "label": "Oil and gas industry", "value": 29 },
+          { "label": "Don't know", "value": 13 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 50 },
+            { "label": "Oil and gas industry", "value": 39 },
+            { "label": "Don't know", "value": 11 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 64 },
+            { "label": "Oil and gas industry", "value": 21 },
+            { "label": "Don't know", "value": 15 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 61 },
+            { "label": "Oil and gas industry", "value": 26 },
+            { "label": "Don't know", "value": 13 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 59 },
+            { "label": "Oil and gas industry", "value": 28 },
+            { "label": "Don't know", "value": 14 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 53 },
+            { "label": "Oil and gas industry", "value": 28 },
+            { "label": "Don't know", "value": 18 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 54 },
+            { "label": "Oil and gas industry", "value": 37 },
+            { "label": "Don't know", "value": 9 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "Clean energy industries, including renewable energy", "value": 57 },
+            { "label": "Oil and gas industry", "value": 30 },
+            { "label": "Don't know", "value": 13 }
+          ]}
+        ]
+      },
+      {
+        "text": "Thinking about Scotland's energy workers and supply chains, which statement best reflects your view?",
+        "options": [
+          { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 34 },
+          { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 33 },
+          { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 22 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 34 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 29 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 30 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 34 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 37 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 14 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 37 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 34 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 16 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 37 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 27 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 19 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 36 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 31 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 21 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 29 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 34 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 29 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "The UK and Scottish Governments should have delivered a transition plan to renewables a decade ago, because North Sea oil and gas production has been falling for years", "value": 30 },
+            { "label": "The UK and Scottish Governments should deliver a transition plan right now, because North Sea oil and gas production is declining", "value": 37 },
+            { "label": "The UK and Scottish Governments should delay any transition plan for another decade, because oil and gas production will continue for some time", "value": 26 }
+          ]}
+        ]
+      },
+      {
+        "text": "How well do you think the Scottish Government has supported a fair transition for Scotland's energy workers?",
+        "options": [
+          { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 9 },
+          { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 41 },
+          { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 27 },
+          { "label": "Don't know", "value": 23 }
+        ],
+        "demographics": [
+          { "name": "Male", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 11 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 39 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 32 },
+            { "label": "Don't know", "value": 18 }
+          ]},
+          { "name": "Female", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 8 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 42 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 22 },
+            { "label": "Don't know", "value": 28 }
+          ]},
+          { "name": "16-34", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 4 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 43 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 25 },
+            { "label": "Don't know", "value": 28 }
+          ]},
+          { "name": "35-44", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 7 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 41 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 25 },
+            { "label": "Don't know", "value": 26 }
+          ]},
+          { "name": "45-54", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 10 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 37 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 27 },
+            { "label": "Don't know", "value": 26 }
+          ]},
+          { "name": "55-64", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 11 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 39 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 30 },
+            { "label": "Don't know", "value": 20 }
+          ]},
+          { "name": "65+", "options": [
+            { "label": "It has done everything it can with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 16 },
+            { "label": "It has taken some action, but not enough, with the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 41 },
+            { "label": "It has not used the powers it has to boost jobs in renewable energy, including wind manufacturing", "value": 29 },
+            { "label": "Don't know", "value": 15 }
+          ]}
+        ]
+      }
+    ]
+  },
+  {
     "id": "link-voting-2025",
     "name": "Environment and voting intention",
     "type": "snapshot",
