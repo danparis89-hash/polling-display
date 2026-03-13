@@ -1233,15 +1233,14 @@ let polls = [
   },
   {
     id: "more-in-common-climate-outreach-scotland-2024",
-    name: "Climate Big Picture 2024 - Scotland",
+    name: "Britain Talks Climate",
     type: "snapshot",
     source: "Climate Outreach",
+    sourceUrl: "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
     pollster: "More in Common",
     topic: ["Climate change"],
-    sampleSize: "",
+    sampleSize: "1,000",
     date: "2024",
-    link: "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
-    description: "Scottish public attitudes to climate change action, Net Zero, government performance, and public transport use.",
     questions: [
       {
         text: "Relating to actions you can take to help tackle climate change, where do you place yourself on the following scale?",
@@ -1288,15 +1287,15 @@ let polls = [
   },
   {
     id: "diffley-uplift-energy-2025",
-    name: "Energy Survey - November 2025",
+    name: "Oil and gas",
     type: "snapshot",
     source: "Uplift",
+    sourceUrl: "https://diffleypartnership.co.uk/energy-survey-uplift-november-2025/",
     pollster: "Diffley",
-    topic: ["Climate Change", "Oil and gas"],
+    topic: ["Climate change", "Oil and gas"],
     sampleSize: "2,352",
     date: "November 2025",
-    link: "https://diffleypartnership.co.uk/energy-survey-uplift-november-2025/",
-    description: "Scottish public attitudes to climate change, North Sea oil and gas drilling, and the energy transition.",
+    demographicsDefaultOff: true,
     questions: [
       {
         text: "How much, if at all, do you care about climate change as an issue?",
@@ -1656,7 +1655,7 @@ let currentPollsterFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
 let activeDemographic = null; // name of active demographic group or null
-let visibleSeries = new Set(['National']); // for snapshot polls with per-question demographics
+let visibleSeries = new Set(['All voters']); // for snapshot polls with per-question demographics
 
 // ──────────────────────────────────────────────
 // FILTERS
@@ -1753,7 +1752,9 @@ function selectPoll(id) {
   const poll = polls.find(p => p.id === id);
   if (poll.type === 'snapshot' && poll.questions?.some(q => q.demographics)) {
     const demoNames = poll.questions.find(q => q.demographics).demographics.map(d => d.name);
-    visibleSeries = new Set(['National', ...demoNames]);
+    visibleSeries = poll.demographicsDefaultOff
+      ? new Set(['All voters'])
+      : new Set(['All voters', ...demoNames]);
   }
   renderPollList();
 
@@ -1773,7 +1774,6 @@ function renderTrackingPoll(poll) {
     <div class="poll-display">
       <div class="poll-title-bar">
         <h2>${poll.name}</h2>
-        <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
         <div class="info-chip"><span class="label">Source:</span>${safeUrl(poll.sourceUrl) ? `<a href="${safeUrl(poll.sourceUrl)}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
@@ -2001,14 +2001,13 @@ function renderSnapshotPoll(poll) {
   const main = document.getElementById('mainContent');
   const hasSeriesData = poll.questions && poll.questions.some(q => q.demographics);
   const demoNames = hasSeriesData ? poll.questions.find(q => q.demographics).demographics.map(d => d.name) : [];
-  const allSeriesNames = hasSeriesData ? ['National', ...demoNames] : [];
+  const allSeriesNames = hasSeriesData ? ['All voters', ...demoNames] : [];
   const seriesColors = ['#4a90d9', '#2ecc71', '#9b59b6'];
 
   main.innerHTML = `
     <div class="poll-display">
       <div class="poll-title-bar">
         <h2>${poll.name}</h2>
-        <div class="poll-description">${poll.description}</div>
       </div>
       <div class="poll-info-row">
         <div class="info-chip"><span class="label">Source:</span>${safeUrl(poll.sourceUrl) ? `<a href="${safeUrl(poll.sourceUrl)}" target="_blank" rel="noopener noreferrer">${poll.source}</a>` : poll.source}</div>
@@ -2056,7 +2055,7 @@ function renderSnapshotPoll(poll) {
 
     // Multi-series: group bars by option, one bar per visible series
     const seriesData = [
-      { name: 'National', options: q.options },
+      { name: 'All voters', options: q.options },
       ...(q.demographics ?? [])
     ];
     const activeSeriesList = allSeriesNames

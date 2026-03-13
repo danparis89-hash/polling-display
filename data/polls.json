@@ -412,15 +412,14 @@
   },
   {
     "id": "more-in-common-climate-outreach-scotland-2024",
-    "name": "Climate Big Picture 2024 - Scotland",
+    "name": "Britain Talks Climate",
     "type": "snapshot",
     "source": "Climate Outreach",
+    "sourceUrl": "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
     "pollster": "More in Common",
     "topic": ["Climate change"],
-    "sampleSize": "",
+    "sampleSize": "1,000",
     "date": "2024",
-    "link": "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
-    "description": "Scottish public attitudes to climate change action, Net Zero, government performance, and public transport use.",
     "questions": [
       {
         "text": "Relating to actions you can take to help tackle climate change, where do you place yourself on the following scale?",
@@ -467,15 +466,15 @@
   },
   {
     "id": "diffley-uplift-energy-2025",
-    "name": "Energy Survey - November 2025",
+    "name": "Oil and gas",
     "type": "snapshot",
     "source": "Uplift",
+    "sourceUrl": "https://diffleypartnership.co.uk/energy-survey-uplift-november-2025/",
     "pollster": "Diffley",
-    "topic": ["Climate Change", "Oil and gas"],
+    "topic": ["Climate change", "Oil and gas"],
     "sampleSize": "2,352",
     "date": "November 2025",
-    "link": "https://diffleypartnership.co.uk/energy-survey-uplift-november-2025/",
-    "description": "Scottish public attitudes to climate change, North Sea oil and gas drilling, and the energy transition.",
+    "demographicsDefaultOff": true,
     "questions": [
       {
         "text": "How much, if at all, do you care about climate change as an issue?",
