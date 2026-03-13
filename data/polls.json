@@ -58,6 +58,61 @@
     ]
   },
   {
+    "id": "more-in-common-climate-outreach-scotland-2024",
+    "name": "Climate Big Picture 2024 - Scotland",
+    "type": "snapshot",
+    "source": "Climate Outreach",
+    "pollster": "More in Common",
+    "topic": "Climate Change",
+    "sampleSize": "",
+    "date": "2024",
+    "link": "https://climateoutreach.org/britain-talks-climate/climate-big-picture-2024/scotland/",
+    "description": "Scottish public attitudes to climate change action, Net Zero, government performance, and public transport use.",
+    "questions": [
+      {
+        "text": "Relating to actions you can take to help tackle climate change, where do you place yourself on the following scale?",
+        "options": [
+          { "label": "1 - I am highly motivated to take action on climate change", "value": 16 },
+          { "label": "2", "value": 29 },
+          { "label": "3", "value": 35 },
+          { "label": "4", "value": 10 },
+          { "label": "5 - I am not concerned about taking action on climate change", "value": 8 },
+          { "label": "Don't know", "value": 1 }
+        ]
+      },
+      {
+        "text": "Do you think that reaching Net Zero will be...",
+        "options": [
+          { "label": "Very good for Scotland", "value": 28 },
+          { "label": "Mostly good for Scotland", "value": 33 },
+          { "label": "Neither good nor bad for Scotland", "value": 16 },
+          { "label": "Mostly bad for Scotland", "value": 8 },
+          { "label": "Very bad for Scotland", "value": 7 },
+          { "label": "Don't know", "value": 8 }
+        ]
+      },
+      {
+        "text": "On the issue of tackling our contribution to climate change, would you say the Scottish government is doing...",
+        "options": [
+          { "label": "A better job than the Westminster government", "value": 28 },
+          { "label": "About the same as the Westminster government", "value": 36 },
+          { "label": "A worse job than the Westminster government", "value": 18 },
+          { "label": "Don't know", "value": 17 }
+        ]
+      },
+      {
+        "text": "How often do you use public transport?",
+        "options": [
+          { "label": "Every day", "value": 9 },
+          { "label": "Around every other day", "value": 17 },
+          { "label": "Around once a week", "value": 21 },
+          { "label": "Around once a month", "value": 32 },
+          { "label": "Never", "value": 21 }
+        ]
+      }
+    ]
+  },
+  {
     "id": "link-voting-2025",
     "name": "Environment and voting intention",
     "type": "snapshot",
