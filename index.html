@@ -1823,7 +1823,12 @@ function toggleSnapshotSeries(name) {
     visibleSeries.add(name);
   }
   const poll = polls.find(p => p.id === activePollId);
-  if (poll) renderSnapshotPoll(poll);
+  if (poll) {
+    const main = document.getElementById('mainContent');
+    const scrollTop = main.scrollTop;
+    renderSnapshotPoll(poll);
+    main.scrollTop = scrollTop;
+  }
 }
 
 function buildTrackingChart(poll) {
