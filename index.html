@@ -2015,17 +2015,6 @@ function renderSnapshotPoll(poll) {
         <div class="info-chip"><span class="label">Date:</span>${poll.date}</div>
         ${poll.pollster ? `<div class="info-chip"><span class="label">Pollster:</span>${poll.pollster}</div>` : ''}
       </div>
-      ${hasSeriesData && !poll.questions.some(q => q.partyGrouped || q.type === 'partyComparison') ? `
-      <div style="margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
-        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);">Show:</span>
-        ${allSeriesNames.map((name, i) => {
-          const color = seriesColors[i % seriesColors.length];
-          const active = visibleSeries.has(name);
-          return `<button class="series-toggle-btn ${active ? 'active' : ''}" style="border-color:${color};color:${color};" onclick="toggleSnapshotSeries('${name}')">
-            <span class="series-toggle-dot" style="background:${active ? color : 'transparent'};border:2px solid ${color};"></span>${name}
-          </button>`;
-        }).join('')}
-      </div>` : ''}
       <div class="snapshot-container" id="snapshotContainer"></div>
       ${poll.demographics ? '<div id="demographicSection"></div>' : ''}
     </div>
@@ -2086,7 +2075,17 @@ function renderSnapshotPoll(poll) {
       `;
     }).join('');
 
-    return `<div class="snapshot-question"><h3>${q.text}</h3>${groups}</div>`;
+    const toggleBar = `
+      <div style="margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+        ${allSeriesNames.map((name, i) => {
+          const color = seriesColors[i % seriesColors.length];
+          const active = visibleSeries.has(name);
+          return `<button class="series-toggle-btn ${active ? 'active' : ''}" style="border-color:${color};color:${color};" onclick="toggleSnapshotSeries('${name}')">
+            <span class="series-toggle-dot" style="background:${active ? color : 'transparent'};border:2px solid ${color};"></span>${name}
+          </button>`;
+        }).join('')}
+      </div>`;
+    return `<div class="snapshot-question"><h3>${q.text}</h3>${toggleBar}${groups}</div>`;
   }).join('');
 
   // Legacy flat demographics (snapshot uses bar charts for point-in-time breakdowns)
