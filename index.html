@@ -528,9 +528,6 @@
     <h1>Polling Dashboard</h1>
     <div class="subtitle">Scottish environmental opinion polling</div>
   </div>
-  <div style="color: rgba(255,255,255,0.75); font-size: 0.8rem;">
-    Last updated: <span id="lastUpdated"></span>
-  </div>
 </header>
 
 <div class="layout">
@@ -2128,9 +2125,6 @@ function renderSnapshotPoll(poll) {
 // ──────────────────────────────────────────────
 // INIT
 // ──────────────────────────────────────────────
-document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
-  year: 'numeric', month: 'long', day: 'numeric'
-});
 populateFilterDropdowns();
 renderPollList();
 </script>
