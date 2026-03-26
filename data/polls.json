@@ -58,6 +58,37 @@
     ]
   },
   {
+    "id": "scottish-gov-pim-climate",
+    "name": "Public Insight Monitor",
+    "type": "tracking",
+    "source": "Scottish Government",
+    "sourceUrl": "https://www.gov.scot/publications/public-attitudes-to-cost-of-living-and-other-topics-tracker-data-tables/",
+    "pollster": "YouGov",
+    "topic": "Climate change",
+    "sampleSize": "1,000",
+    "frequency": "Quarterly",
+    "description": "Tracking poll on Scottish public attitudes to climate change, including concern and trust in the Scottish Government to act in Scotland's best interests.",
+    "labels": ["Jan-24", "Mar-24", "Jul-24", "Sep-24", "Dec-24", "Mar-25", "Jun-25", "Sep-25", "Dec-25", "Feb-26"],
+    "series": [
+      {
+        "name": "Q1: Concerned about climate change in the year ahead",
+        "data": [18, 16, 18, 15, 17, 15, 15, 14, 13, 15]
+      }
+    ],
+    "additionalQuestions": [
+      {
+        "text": "Q2: How much do you trust the Scottish Government to work in Scotland's best interests in relation to climate change?",
+        "series": [
+          { "name": "A great deal", "data": [12, 13, 9, 9, 9, 9, 8, 9, 7, 9] },
+          { "name": "Quite a lot", "data": [24, 25, 26, 22, 24, 26, 23, 23, 26, 28] },
+          { "name": "Not very much", "data": [33, 33, 36, 35, 37, 33, 36, 35, 34, 33] },
+          { "name": "Not at all", "data": [21, 18, 20, 24, 19, 20, 19, 21, 20, 19] },
+          { "name": "Unsure", "data": [10, 11, 10, 10, 11, 12, 13, 12, 14, 11] }
+        ]
+      }
+    ]
+  },
+  {
     "id": "link-nature-2022",
     "name": "Attitudes to nature",
     "type": "snapshot",

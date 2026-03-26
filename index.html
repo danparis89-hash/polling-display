@@ -658,6 +658,34 @@ let polls = [
     ]
   },
   {
+    id: "scottish-gov-pim-climate",
+    name: "Public Insight Monitor",
+    type: "tracking",
+    source: "Scottish Government",
+    sourceUrl: "https://www.gov.scot/publications/public-attitudes-to-cost-of-living-and-other-topics-tracker-data-tables/",
+    pollster: "YouGov",
+    topic: "Climate change",
+    sampleSize: "1,000",
+    frequency: "Quarterly",
+    description: "Tracking poll on Scottish public attitudes to climate change, including concern and trust in the Scottish Government to act in Scotland's best interests.",
+    labels: ["Jan-24", "Mar-24", "Jul-24", "Sep-24", "Dec-24", "Mar-25", "Jun-25", "Sep-25", "Dec-25", "Feb-26"],
+    series: [
+      { name: "Q1: Concerned about climate change in the year ahead", data: [18, 16, 18, 15, 17, 15, 15, 14, 13, 15] }
+    ],
+    additionalQuestions: [
+      {
+        text: "Q2: How much do you trust the Scottish Government to work in Scotland's best interests in relation to climate change?",
+        series: [
+          { name: "A great deal", data: [12, 13, 9, 9, 9, 9, 8, 9, 7, 9] },
+          { name: "Quite a lot", data: [24, 25, 26, 22, 24, 26, 23, 23, 26, 28] },
+          { name: "Not very much", data: [33, 33, 36, 35, 37, 33, 36, 35, 34, 33] },
+          { name: "Not at all", data: [21, 18, 20, 24, 19, 20, 19, 21, 20, 19] },
+          { name: "Unsure", data: [10, 11, 10, 10, 11, 12, 13, 12, 14, 11] }
+        ]
+      }
+    ]
+  },
+  {
     id: "link-voting-2025",
     name: "Environment and voting intention",
     type: "snapshot",
@@ -1655,6 +1683,7 @@ let currentSourceFilter = 'all';
 let currentPollsterFilter = 'all';
 let activePollId = null;
 let chartInstance = null;
+let additionalChartInstances = [];
 let activeDemographic = null; // name of active demographic group or null
 let visibleSeries = new Set(['All voters']); // for snapshot polls with per-question demographics
 
@@ -1793,11 +1822,18 @@ function renderTrackingPoll(poll) {
         <canvas id="trackingChart"></canvas>
         <div class="chart-legend" id="chartLegend"></div>
       </div>
+      ${poll.additionalQuestions ? poll.additionalQuestions.map((q, qi) => `
+      <div class="chart-card" style="margin-top:1.25rem;">
+        <div style="font-size:0.875rem;color:var(--text-muted);margin-bottom:0.75rem;">${q.text}</div>
+        <canvas id="additionalChart${qi}"></canvas>
+        <div class="chart-legend" id="additionalLegend${qi}"></div>
+      </div>`).join('') : ''}
     </div>
   `;
 
-  // Build chart
+  // Build charts
   buildTrackingChart(poll);
+  buildAdditionalCharts(poll);
 
 }
 
@@ -1935,6 +1971,75 @@ function buildTrackingChart(poll) {
     }
   }
   legendEl.innerHTML = legendHtml;
+}
+
+function buildAdditionalCharts(poll) {
+  additionalChartInstances.forEach(c => c.destroy());
+  additionalChartInstances = [];
+  if (!poll.additionalQuestions) return;
+
+  poll.additionalQuestions.forEach((q, qi) => {
+    const ctx = document.getElementById(`additionalChart${qi}`);
+    if (!ctx) return;
+    const datasets = q.series.map((s, i) => ({
+      label: s.name,
+      data: s.data,
+      borderColor: COLORS[i % COLORS.length],
+      backgroundColor: COLORS[i % COLORS.length] + '18',
+      borderWidth: 2.5,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      tension: 0.3,
+      fill: false
+    }));
+
+    const inst = new Chart(ctx.getContext('2d'), {
+      type: 'line',
+      data: { labels: poll.labels, datasets },
+      options: {
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#ffffff',
+            borderColor: '#d8dfe8',
+            borderWidth: 1,
+            titleColor: '#1e293b',
+            bodyColor: '#1e293b',
+            padding: 12,
+            filter: item => item.parsed.y !== null,
+            callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` }
+          }
+        },
+        scales: {
+          x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
+          y: { min: 0, grid: { color: '#e2e8f0' }, ticks: { color: '#64748b', callback: v => v + '%' } }
+        }
+      }
+    });
+    additionalChartInstances.push(inst);
+
+    const legendEl = document.getElementById(`additionalLegend${qi}`);
+    if (legendEl) {
+      legendEl.innerHTML = q.series.map((s, i) => `
+        <div class="legend-item" onclick="toggleAdditionalDataset(${qi}, ${i}, this)">
+          <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
+          <span>${s.name}</span>
+        </div>`).join('');
+    }
+  });
+}
+
+function toggleAdditionalDataset(chartIdx, datasetIdx, el) {
+  const inst = additionalChartInstances[chartIdx];
+  if (!inst) return;
+  const meta = inst.getDatasetMeta(datasetIdx);
+  meta.hidden = !meta.hidden;
+  el.classList.toggle('hidden', meta.hidden);
+  inst.update();
 }
 
 // ──────────────────────────────────────────────
